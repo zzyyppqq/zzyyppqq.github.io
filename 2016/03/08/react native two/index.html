@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>如何创建一个android的react-native组件（二） | zzyyppqq的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="接着上一篇文章，这一篇我把自己上传到npm上的react-native-segmented-android开发步骤和大家分享。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何创建一个android的react-native组件（二）">
+<meta property="og:url" content="http://zzyyppqq.github.io/2016/03/08/react native two/index.html">
+<meta property="og:site_name" content="zzyyppqq的个人博客">
+<meta property="og:description" content="接着上一篇文章，这一篇我把自己上传到npm上的react-native-segmented-android开发步骤和大家分享。">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-5310bdbd05de2f9c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-c587357339bc9564.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-a73ac5ed4279d3b4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-5667c109ff94e90a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-6d0e64d3bcd7f9b1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-ff57d8bf787a86d5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-855f138b880ddeec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-03-08T15:10:47.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何创建一个android的react-native组件（二）">
+<meta name="twitter:description" content="接着上一篇文章，这一篇我把自己上传到npm上的react-native-segmented-android开发步骤和大家分享。">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1226849-5310bdbd05de2f9c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+  
+    <link rel="alternative" href="/atom.xml" title="zzyyppqq的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/avatar.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  
+      <link href="//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false,
+      }
+  </script>
+
+  
+      <script>
+          yiliaConfig.rootUrl = "/";
+      </script>
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">zzyyppqq</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">Android知识分享</p>
+        
+        
+        <form><input type="text" class="search" placeholder=" Search..."></form>
+                
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:hnszyp@126.com" title="Email"></a></li>
+                            
+                                <li id="简书"><a class="简书" target="_blank" href="http://www.jianshu.com/users/4a633d456ac7/latest_articles" title="简书"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/zzyyppqq" title="GitHub"></a></li>
+                            
+                                <li id="StackOverflow"><a class="StackOverflow" target="_blank" href="#" title="StackOverflow"></a></li>
+                            
+                                <li id="新浪微博"><a class="新浪微博" target="_blank" href="/sina weibo" title="新浪微博"></a></li>
+                            
+                                <li id="V2EX"><a class="V2EX" target="_blank" href="#" title="V2EX"></a></li>
+                            
+                                <li id="知乎"><a class="知乎" target="_blank" href="/zhihu" title="知乎"></a></li>
+                            
+                                <li id="豆瓣"><a class="豆瓣" target="_blank" href="/douban" title="豆瓣"></a></li>
+                            
+                                <li id="SegmentFault"><a class="SegmentFault" target="_blank" href="/" title="SegmentFault"></a></li>
+                            
+                                <li id="网易云音乐"><a class="网易云音乐" target="_blank" href="/netease" title="网易云音乐"></a></li>
+                            
+                                <li id="Facebook"><a class="Facebook" target="_blank" href="#" title="Facebook"></a></li>
+                            
+                                <li id="Google"><a class="Google" target="_blank" href="#" title="Google"></a></li>
+                            
+                                <li id="Twitter"><a class="Twitter" target="_blank" href="#" title="Twitter"></a></li>
+                            
+                                <li id="LinkedIn"><a class="LinkedIn" target="_blank" href="#" title="LinkedIn"></a></li>
+                            
+                                <li id="QQ"><a class="QQ" target="_blank" href="#" title="QQ"></a></li>
+                            
+                                <li id="微信"><a class="微信" target="_blank" href="/Wechat" title="微信"></a></li>
+                            
+                                <li id="PayPal"><a class="PayPal" target="_blank" href="#" title="PayPal"></a></li>
+                            
+                                <li id="Instagram"><a class="Instagram" target="_blank" href="#" title="Instagram"></a></li>
+                            
+                                <li id="Flickr"><a class="Flickr" target="_blank" href="#" title="Flickr"></a></li>
+                            
+                                <li id="reddit"><a class="reddit" target="_blank" href="/" title="reddit"></a></li>
+                            
+                                <li id="Medium"><a class="Medium" target="_blank" href="/" title="Medium"></a></li>
+                            
+                                <li id="TiddlyWiki"><a class="TiddlyWiki" target="_blank" href="/" title="TiddlyWiki"></a></li>
+                            
+                                <li id="Tumblr"><a class="Tumblr" target="_blank" href="/" title="Tumblr"></a></li>
+                            
+                                <li id="_500px"><a class="_500px" target="_blank" href="/" title="_500px"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/android/" style="font-size: 20px;">android</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/react-native/" style="font-size: 15px;">react-native</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://zzyyppqq.github.io/">zzyyppqq</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于Android</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">zzyyppqq</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">zzyyppqq</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">Android知识分享</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:hnszyp@126.com" title="Email"></a></li>
+                            
+                                <li id="简书"><a class="简书" target="_blank" href="http://www.jianshu.com/users/4a633d456ac7/latest_articles" title="简书"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/zzyyppqq" title="GitHub"></a></li>
+                            
+                                <li id="StackOverflow"><a class="StackOverflow" target="_blank" href="#" title="StackOverflow"></a></li>
+                            
+                                <li id="新浪微博"><a class="新浪微博" target="_blank" href="/sina weibo" title="新浪微博"></a></li>
+                            
+                                <li id="V2EX"><a class="V2EX" target="_blank" href="#" title="V2EX"></a></li>
+                            
+                                <li id="知乎"><a class="知乎" target="_blank" href="/zhihu" title="知乎"></a></li>
+                            
+                                <li id="豆瓣"><a class="豆瓣" target="_blank" href="/douban" title="豆瓣"></a></li>
+                            
+                                <li id="SegmentFault"><a class="SegmentFault" target="_blank" href="/" title="SegmentFault"></a></li>
+                            
+                                <li id="网易云音乐"><a class="网易云音乐" target="_blank" href="/netease" title="网易云音乐"></a></li>
+                            
+                                <li id="Facebook"><a class="Facebook" target="_blank" href="#" title="Facebook"></a></li>
+                            
+                                <li id="Google"><a class="Google" target="_blank" href="#" title="Google"></a></li>
+                            
+                                <li id="Twitter"><a class="Twitter" target="_blank" href="#" title="Twitter"></a></li>
+                            
+                                <li id="LinkedIn"><a class="LinkedIn" target="_blank" href="#" title="LinkedIn"></a></li>
+                            
+                                <li id="QQ"><a class="QQ" target="_blank" href="#" title="QQ"></a></li>
+                            
+                                <li id="微信"><a class="微信" target="_blank" href="/Wechat" title="微信"></a></li>
+                            
+                                <li id="PayPal"><a class="PayPal" target="_blank" href="#" title="PayPal"></a></li>
+                            
+                                <li id="Instagram"><a class="Instagram" target="_blank" href="#" title="Instagram"></a></li>
+                            
+                                <li id="Flickr"><a class="Flickr" target="_blank" href="#" title="Flickr"></a></li>
+                            
+                                <li id="reddit"><a class="reddit" target="_blank" href="/" title="reddit"></a></li>
+                            
+                                <li id="Medium"><a class="Medium" target="_blank" href="/" title="Medium"></a></li>
+                            
+                                <li id="TiddlyWiki"><a class="TiddlyWiki" target="_blank" href="/" title="TiddlyWiki"></a></li>
+                            
+                                <li id="Tumblr"><a class="Tumblr" target="_blank" href="/" title="Tumblr"></a></li>
+                            
+                                <li id="_500px"><a class="_500px" target="_blank" href="/" title="_500px"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-react native two" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/08/react native two/" class="article-date">
+      <time datetime="2016-03-08T03:48:07.000Z" itemprop="datePublished">2016-03-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      如何创建一个android的react-native组件（二）
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/React-Native/">React Native</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react-native/">react-native</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>接着上一篇文章，这一篇我把自己上传到npm上的<a href="https://www.npmjs.com/package/react-native-segmented-android" target="_blank" rel="external">react-native-segmented-android</a>开发步骤和大家分享。<br><a id="more"></a><br>下载react-native组件命令：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install react-native-segmented-android --save</span><br></pre></td></tr></table></figure></p>
+<p>这是效果图：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-5310bdbd05de2f9c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Segmented.png"><br>这次要实现的是View组件，所以要通过继承SimpleViewManager 来实现，步骤和（一）基本保持一致。</p>
+<h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><p>Step 1 - 新建react-native工程 ReactNativeSegmentedAndroid<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ react-native init ReactNativeSegmentedAndroid</span><br></pre></td></tr></table></figure></p>
+<p>Step 2 - 将新建的工程导入android studio然后新建空library（以react-native-segmented-android为library的名称）</p>
+<p>Step 3 - 新建空library（以react-native-segmented-android为library的名称）<br>在library目录下的build.gradle中添加react-native的依赖</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// file: android/react-native-segmented-android/build.gradle</span></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="keyword">dependencies</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">compile</span> <span class="string">'info.hoang8f:android-segmented:1.0.6'</span></span><br><span class="line">    <span class="keyword">compile</span> <span class="string">'com.facebook.react:react-native:0.16.+'</span> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Step 4 - 创建AndroidSegmented类继承SegmentedGroup<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AndroidSegmented</span> <span class="keyword">extends</span> <span class="title">SegmentedGroup</span></span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setSegmentOrientation</span><span class="params">(String str)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(str.equals(<span class="string">"horizontal"</span>))&#123;</span><br><span class="line">            setOrientation(RadioGroup.HORIZONTAL);</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(str.equals(<span class="string">"vertical"</span>))&#123;</span><br><span class="line">            setOrientation(RadioGroup.VERTICAL);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AndroidSegmented</span><span class="params">(ThemedReactContext context)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(context);</span><br><span class="line">        setGravity(Gravity.CENTER);</span><br><span class="line"></span><br><span class="line">        setLayoutParams(<span class="keyword">new</span> ViewGroup.LayoutParams(</span><br><span class="line">                ViewGroup.LayoutParams.WRAP_CONTENT,</span><br><span class="line">                ViewGroup.LayoutParams.WRAP_CONTENT</span><br><span class="line">        ));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Runnable mLayoutRunnable = <span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            measure(MeasureSpec.makeMeasureSpec(getWidth(), MeasureSpec.EXACTLY),</span><br><span class="line">                    MeasureSpec.makeMeasureSpec(getHeight(), MeasureSpec.EXACTLY));</span><br><span class="line">            layout(getLeft(), getTop(), getRight(), getBottom());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">requestLayout</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.requestLayout();</span><br><span class="line">        post(mLayoutRunnable);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onLayout</span><span class="params">(<span class="keyword">boolean</span> changed, <span class="keyword">int</span> l, <span class="keyword">int</span> t, <span class="keyword">int</span> r, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onLayout(changed, l, t, r, b);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Step 5 - 继承SimpleViewManager，注意这时就不是继承ReactContextBaseJavaModule了 ，大家可以很明显的发现setChildText（）方法上多了一个‘@ReactProp(name = “childText”)’，加上了‘@ReactProp’的，segmented控件多了一个name为childText的属性，值为ReadableArray ( js端代码:childText={[‘One’,’Two’,’Three’,’Four’,”Five”]})。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AndroidSegmentedManager</span> <span class="keyword">extends</span> <span class="title">SimpleViewManager</span>&lt;<span class="title">AndroidSegmented</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String REACT_CLASS = <span class="string">"AndroidSegmented"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String COLOR_REGEX = <span class="string">"^#([0-9A-Fa-f]&#123;6&#125;|[0-9A-Fa-f]&#123;8&#125;)$"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Context context;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> REACT_CLASS;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> AndroidSegmented <span class="title">createViewInstance</span><span class="params">(ThemedReactContext reactContext)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.context = reactContext;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> AndroidSegmented(reactContext);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">addEventEmitters</span><span class="params">(<span class="keyword">final</span> ThemedReactContext reactContext, <span class="keyword">final</span> AndroidSegmented view)</span> </span>&#123;</span><br><span class="line">        view.setOnCheckedChangeListener(<span class="keyword">new</span> RadioGroup.OnCheckedChangeListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCheckedChanged</span><span class="params">(RadioGroup group, <span class="keyword">int</span> checkedId)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                <span class="keyword">int</span> childCount = view.getChildCount();</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; childCount; i++) &#123;</span><br><span class="line">                    ((RadioButton)view.getChildAt(i)).setChecked(<span class="keyword">false</span>);</span><br><span class="line">                    <span class="keyword">if</span> (view.getChildAt(i).getId() == checkedId) &#123;</span><br><span class="line">                        ((RadioButton)view.getChildAt(i)).setChecked(<span class="keyword">true</span>);</span><br><span class="line"> </span><br><span class="line">                        reactContext.getNativeModule(UIManagerModule.class).getEventDispatcher()</span><br><span class="line">                                .dispatchEvent( </span><br><span class="line">                                        <span class="keyword">new</span> AndroidSegmentedEvent( </span><br><span class="line">                                                view.getId(),</span><br><span class="line">                                                SystemClock.uptimeMillis(),</span><br><span class="line">                                                i));</span><br><span class="line">                    &#125; </span><br><span class="line">                &#125; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@ReactProp</span>(name = <span class="string">"childText"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setChildText</span><span class="params">(AndroidSegmented view, ReadableArray data)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> childCount = data.size();</span><br><span class="line">        Log.e(<span class="string">"TAG"</span>, <span class="string">"___"</span> + childCount);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; childCount; i++) &#123;</span><br><span class="line">            RadioButton child = (RadioButton) LayoutInflater.from(context).inflate(R.layout.radio_button, <span class="keyword">null</span>);</span><br><span class="line"></span><br><span class="line">            child.setText(data.getString(i));</span><br><span class="line">            view.addView(child);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@ReactProp</span>(name = <span class="string">"selectedPosition"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setSelectedChild</span><span class="params">(AndroidSegmented view, <span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        RadioButton radioBt= (RadioButton)(view.getChildAt(position));</span><br><span class="line">        radioBt.setChecked(<span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@ReactProp</span>(name = <span class="string">"orientation"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setOrientation</span><span class="params">(AndroidSegmented view, String orientation)</span> </span>&#123;</span><br><span class="line">        view.setSegmentOrientation(orientation);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@ReactProp</span>(name = <span class="string">"tintColor"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setTintColor</span><span class="params">(AndroidSegmented view, ReadableArray data)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        String type0 = data.getType(<span class="number">0</span>).name();</span><br><span class="line">        String type1 = data.getType(<span class="number">1</span>).name();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"String"</span>.equals(type0) &amp;&amp; <span class="string">"String"</span>.equals(type1)) &#123;</span><br><span class="line">            String color0 = data.getString(<span class="number">0</span>);</span><br><span class="line">            String color1 = data.getString(<span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span> (color0 != <span class="keyword">null</span> &amp;&amp; color1 != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (color0.matches(COLOR_REGEX) &amp;&amp; color1.matches(COLOR_REGEX)) &#123;</span><br><span class="line"></span><br><span class="line">                    view.setTintColor(Color.parseColor(color0), Color.parseColor(color1));</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">throw</span> <span class="keyword">new</span> JSApplicationIllegalArgumentException(<span class="string">"Invalid arrowColor property: "</span> + color0);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Step 6 - 创建AndroidSegmentedEvent类继承Event<androidsegmentedevent><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AndroidSegmentedEvent</span> <span class="keyword">extends</span> <span class="title">Event</span>&lt;<span class="title">AndroidSegmentedEvent</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String EVENT_NAME = <span class="string">"topChange"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> selectedPosition;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AndroidSegmentedEvent</span><span class="params">(<span class="keyword">int</span> viewId, <span class="keyword">long</span> timestampMs, <span class="keyword">int</span> selectedPosition)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(viewId, timestampMs);</span><br><span class="line">        <span class="keyword">this</span>.selectedPosition = selectedPosition;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getEventName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> EVENT_NAME;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dispatch</span><span class="params">(RCTEventEmitter rctEventEmitter)</span> </span>&#123;</span><br><span class="line">        rctEventEmitter.receiveEvent(getViewTag(), getEventName(), serializeEventData());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">short</span> <span class="title">getCoalescingKey</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> WritableMap <span class="title">serializeEventData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        WritableMap eventData = Arguments.createMap();</span><br><span class="line">        eventData.putInt(<span class="string">"selected"</span>, getPosition());</span><br><span class="line">        Log.e(<span class="string">"AAA"</span>,<span class="string">"position="</span>+getPosition());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> eventData;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getPosition</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> selectedPosition;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></androidsegmentedevent></p>
+<p>Step 7 - 继承ReactPackage，注意createNativeModules（）返回的是加入了 AndroidToastModule 的集合，createJSModules（）与createViewManagers（）返回的都是空集合，如果Step 4 步继承的是BaseViewManager或其子类，那么createViewManagers（）中返回的就是加入了BaseViewManager的集合，其他的就是空集合，一般情况createJSModules（）的返回值都是空集合。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AndroidSegmentedPackage</span> <span class="keyword">implements</span> <span class="title">ReactPackage</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;NativeModule&gt; <span class="title">createNativeModules</span><span class="params">(ReactApplicationContext reactContext)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Collections.emptyList();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;Class&lt;? extends JavaScriptModule&gt;&gt; createJSModules() &#123;</span><br><span class="line">        <span class="keyword">return</span> Collections.emptyList();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;ViewManager&gt; <span class="title">createViewManagers</span><span class="params">(ReactApplicationContext reactContext)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Arrays.&lt;ViewManager&gt;asList(<span class="keyword">new</span> AndroidSegmentedManager());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Step 8 - 新建AndroidSegmented.js，文件位置<br>‘ android/react-native-segmented-android/AndroidSegmented.js ’代码如下，然后在 ‘android/react-native-segmented-android/’下运行如下命令生成package.json文件<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm init 		//生成package.json文件</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//AndroidSegmented.js</span></span><br><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> React = <span class="built_in">require</span>(<span class="string">'react-native'</span>);</span><br><span class="line"><span class="keyword">var</span> &#123; requireNativeComponent, PropTypes, View &#125; = React;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> NativeAndroidSegmented = requireNativeComponent(<span class="string">'AndroidSegmented'</span>, AndroidSegmented);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AndroidSegmented</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="keyword">super</span>();</span><br><span class="line">    <span class="keyword">this</span>._onChange = <span class="keyword">this</span>._onChange.bind(<span class="keyword">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  _onChange(event) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.props.onChange) &#123;</span><br><span class="line">      <span class="keyword">this</span>.props.onChange(event.nativeEvent);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;NativeAndroidSegmented</span><br><span class="line">        &#123;...this.props&#125; </span><br><span class="line">        onChange=&#123;this._onChange&#125;/&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var colorType = function (props, propName, componentName) &#123;</span><br><span class="line">  var checker = function() &#123;</span><br><span class="line">    var color = props[propName];</span><br><span class="line">    var regex = /^#([0-9A-Fa-f]&#123;6&#125;|[0-9A-Fa-f]&#123;8&#125;)$/;</span><br><span class="line">    if (!regex.test(color)) &#123;</span><br><span class="line">      return new Error('Only accept color formats: #RRGGBB and #AARRGGBB');</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  return PropTypes.string(props, propName, componentName) || checker();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">AndroidSegmented.propTypes = &#123;</span><br><span class="line">  ...View.propTypes,</span><br><span class="line">  childText: PropTypes.arrayOf(PropTypes.oneOfType([ PropTypes.string ])),</span><br><span class="line">  orientation:PropTypes.string,</span><br><span class="line">  tintColor:PropTypes.arrayOf(PropTypes.oneOfType([ PropTypes.string ])),</span><br><span class="line">  selectedPosition:PropTypes.number,</span><br><span class="line">  onChange: PropTypes.func,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">AndroidSegmented.defaultProps = &#123;</span><br><span class="line">  </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">module.exports = AndroidSegmented;</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">//package.json内容</span><br><span class="line">&#123;</span><br><span class="line">  "name": "react-native-segmented-android",</span><br><span class="line">  "version": "1.0.3",</span><br><span class="line">  "description": "a high imitation of iOS segmented Controls",</span><br><span class="line">  "main": "AndroidSegmented.js",</span><br><span class="line">  "scripts": &#123;</span><br><span class="line">    "test": "react-native start"</span><br><span class="line">  &#125;,</span><br><span class="line">  "repository": &#123;</span><br><span class="line">    "type": "git",</span><br><span class="line">    "url": "https://github.com/zzyyppqq/react-native-segmented-android.git"</span><br><span class="line">  &#125;,</span><br><span class="line">  "keywords": [</span><br><span class="line">    "android",</span><br><span class="line">    "segmented",</span><br><span class="line">    "react-component",</span><br><span class="line">    "react-native"</span><br><span class="line">  ],</span><br><span class="line">  "author": "zzyyppqq",</span><br><span class="line">  "license": "ISC",</span><br><span class="line">  "peerDependencies": &#123;</span><br><span class="line">    "react-native": "^1.0.3"</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Step 9 -  复制AndroidSegmented.js 文件到‘/ReactNativeSegmentedAndroid/ ’ 目录下，如下是index.android.js代码，然后运行测试</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> React = <span class="built_in">require</span>(<span class="string">'react-native'</span>);</span><br><span class="line"><span class="keyword">var</span> &#123;</span><br><span class="line">  AppRegistry,</span><br><span class="line">  StyleSheet,</span><br><span class="line">  Text,</span><br><span class="line">  Dimensions,</span><br><span class="line">  ToastAndroid,</span><br><span class="line">  View,</span><br><span class="line">&#125; = React;</span><br><span class="line"></span><br><span class="line"><span class="comment">//var AndroidSegmented = require('react-native-segmented-android');</span></span><br><span class="line"><span class="keyword">var</span> AndroidSegmented = <span class="built_in">require</span>(<span class="string">'./AndroidSegmented'</span>);</span><br><span class="line"><span class="keyword">var</span> deviceWidth = Dimensions.get(<span class="string">'window'</span>).width;</span><br><span class="line"><span class="keyword">var</span> deviceHeight = Dimensions.get(<span class="string">'window'</span>).height;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ReactNativeSegmentedExample = React.createClass(&#123;</span><br><span class="line">  onSelectPosition:<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(event);</span><br><span class="line">    ToastAndroid.show(<span class="string">'segment '</span>+event.selected, ToastAndroid.SHORT)</span><br><span class="line">  &#125;,</span><br><span class="line">  render: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;View&gt;</span><br><span class="line">          &lt;AndroidSegmented</span><br><span class="line">            tintColor=&#123;['#ff0000','#ffffff']&#125;</span><br><span class="line">            style=&#123;&#123;width:deviceWidth,height:60,backgroundColor:'#fff000',</span><br><span class="line">                  justifyContent: 'center',</span><br><span class="line">                  alignItems: 'center'&#125;&#125;</span><br><span class="line">            childText=&#123;['One','Two','Three','Four',"Five"]&#125;</span><br><span class="line">            orientation='horizontal'</span><br><span class="line">            selectedPosition=&#123;0&#125;</span><br><span class="line">            onChange=&#123;this.onSelectPosition&#125; /&gt;</span><br><span class="line"></span><br><span class="line">            &lt;AndroidSegmented</span><br><span class="line">              tintColor=&#123;['#009688','#ffffff']&#125;</span><br><span class="line">              style=&#123;&#123;width:deviceWidth,height:200,backgroundColor:'#fff000',</span><br><span class="line">                    justifyContent: 'center',</span><br><span class="line">                    alignItems: 'center'&#125;&#125;</span><br><span class="line">              childText=&#123;['One','Two','Three','Four',"Five"]&#125;</span><br><span class="line">              orientation='vertical'</span><br><span class="line">              selectedPosition=&#123;0&#125;</span><br><span class="line">              onChange=&#123;this.onSelectPosition&#125; /&gt;</span><br><span class="line">        &lt;/View&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><h3 id="Step-1-Install-the-npm-package"><a href="#Step-1-Install-the-npm-package" class="headerlink" title="Step 1 - Install the npm package"></a>Step 1 - Install the npm package</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install react-native-degment-android --save</span><br></pre></td></tr></table></figure>
+<h3 id="Step-2-Update-Gradle-Settings"><a href="#Step-2-Update-Gradle-Settings" class="headerlink" title="Step 2 - Update Gradle Settings"></a>Step 2 - Update Gradle Settings</h3><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// file: android/settings.gradle</span></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span> <span class="string">':react-native-degment-android'</span>, <span class="string">':app'</span></span><br><span class="line"><span class="keyword">project</span>(<span class="string">':react-native-degment-android'</span>).projectDir = <span class="keyword">new</span> <span class="keyword">File</span>(rootProject.projectDir,<span class="string">'../node_modules/react-native-degment-android'</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="Step-3-Update-app-Gradle-Build"><a href="#Step-3-Update-app-Gradle-Build" class="headerlink" title="Step 3 - Update app Gradle Build"></a>Step 3 - Update app Gradle Build</h3><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// file: android/app/build.gradle</span></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="keyword">dependencies</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">compile</span> <span class="keyword">project</span>(<span class="string">':react-native-degment-android'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Step-4-Register-React-Package"><a href="#Step-4-Register-React-Package" class="headerlink" title="Step 4 - Register React Package"></a>Step 4 - Register React Package</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">import</span> com.higo.zhangyp.segmented.AndroidSegmentedPackage; <span class="comment">// &lt;-- import</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">FragmentActivity</span> <span class="keyword">implements</span> <span class="title">DefaultHardwareBackBtnHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> ReactInstanceManager mReactInstanceManager;</span><br><span class="line">    <span class="keyword">private</span> ReactRootView mReactRootView;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        mReactRootView = <span class="keyword">new</span> ReactRootView(<span class="keyword">this</span>);</span><br><span class="line">        mReactInstanceManager = ReactInstanceManager.builder()</span><br><span class="line">                .setApplication(getApplication())</span><br><span class="line">                .setBundleAssetName(<span class="string">"index.android.bundle"</span>)</span><br><span class="line">                .setJSMainModuleName(<span class="string">"index.android"</span>)</span><br><span class="line">                .addPackage(<span class="keyword">new</span> MainReactPackage())</span><br><span class="line">                .addPackage(<span class="keyword">new</span> AndroidSegmentedPackage()) <span class="comment">// &lt;-- Register package here</span></span><br><span class="line">                .setUseDeveloperSupport(BuildConfig.DEBUG)</span><br><span class="line">                .setInitialLifecycleState(LifecycleState.RESUMED)</span><br><span class="line">                .build();</span><br><span class="line">        mReactRootView.startReactApplication(mReactInstanceManager, <span class="string">"AwesomeProject"</span>, <span class="keyword">null</span>);</span><br><span class="line">        setContentView(mReactRootView);</span><br><span class="line">    &#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>从react-native的官方文档中我们已经知道facebook的react-native团队已经为我们实现了很多组件，例如 Image、Text、ViewPagerAndroid等，我们在index.android.js中可以直接使用这些组件，这些组件为什么能直接使用呢？</p>
+<p>大家会很自然的想到已经封装好了呗。那在哪封装的？如何封装的？其实只要通过命令react-native init ProjectName创建过react-native工程的同学来说，在哪儿封装的一目了然。我们来看react-native工程的结构图：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-c587357339bc9564.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="B3BB8C75-7E30-4BCF-8BFD-4E7AA9A1A563.png"></p>
+<p>react-native工程中，在node_modules下有一个很特别的react-native文件夹，android的工程中的build.gradle 文件多了一个依赖，不用想肯定在这两个地方封装的，这也是react-native的关键。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;    </span><br><span class="line">      compile <span class="string">'com.facebook.react:react-native:0.16.+'</span>   </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<p>首先我们从入口MainActivity开始，看了我的前两篇文章，如何自定义react-native的android组件<a href="http://www.jianshu.com/p/07b928feee3b" target="_blank" rel="external">（一）</a>和<a href="http://www.jianshu.com/p/31c4306a55ff" target="_blank" rel="external">（二）</a>，要使用一个自定义组件，必须在MainActivity中加入【.addPackage(new AndroidSegmentedPackage())  】才能使用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        mReactRootView = <span class="keyword">new</span> ReactRootView(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">        mReactInstanceManager = ReactInstanceManager.builder()</span><br><span class="line">                .setApplication(getApplication())</span><br><span class="line">                .setBundleAssetName(<span class="string">"index.android.bundle"</span>)</span><br><span class="line">                .setJSMainModuleName(<span class="string">"index.android"</span>)</span><br><span class="line">                .addPackage(<span class="keyword">new</span> MainReactPackage())</span><br><span class="line">                .addPackage(<span class="keyword">new</span> AndroidSegmentedPackage())  </span><br><span class="line">                .setUseDeveloperSupport(BuildConfig.DEBUG)</span><br><span class="line">                .setInitialLifecycleState(LifecycleState.RESUMED)</span><br><span class="line">                .build();</span><br><span class="line"></span><br><span class="line">        mReactRootView.startReactApplication(mReactInstanceManager, <span class="string">"ReactNativeSegmented"</span>, <span class="keyword">null</span>);</span><br><span class="line"></span><br><span class="line">        setContentView(mReactRootView);</span><br><span class="line">    &#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>那么官方的Android组件是如何实现的呢，我们肯定注意到了【.addPackage(new MainReactPackage())】和自定义的是不是很像，格式也一样，我想肯定在这里面有实现，进入MainReactPackage类中，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//react-native 源码</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainReactPackage</span> <span class="keyword">implements</span> <span class="title">ReactPackage</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> List&lt;NativeModule&gt; <span class="title">createNativeModules</span><span class="params">(ReactApplicationContext reactContext)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> Arrays.&lt;NativeModule&gt;asList(</span><br><span class="line">      <span class="keyword">new</span> AsyncStorageModule(reactContext),</span><br><span class="line">      <span class="keyword">new</span> FrescoModule(reactContext),</span><br><span class="line">      <span class="keyword">new</span> IntentModule(reactContext),</span><br><span class="line">      <span class="keyword">new</span> LocationModule(reactContext),</span><br><span class="line">      <span class="keyword">new</span> NetworkingModule(reactContext),</span><br><span class="line">      <span class="keyword">new</span> WebSocketModule(reactContext),</span><br><span class="line">      <span class="keyword">new</span> ToastModule(reactContext));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">public</span> List&lt;Class&lt;? extends JavaScriptModule&gt;&gt; createJSModules() &#123;</span><br><span class="line">    <span class="keyword">return</span> Collections.emptyList();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> List&lt;ViewManager&gt; <span class="title">createViewManagers</span><span class="params">(ReactApplicationContext reactContext)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> Arrays.&lt;ViewManager&gt;asList(</span><br><span class="line">      <span class="keyword">new</span> ReactDrawerLayoutManager(),</span><br><span class="line">      <span class="keyword">new</span> ReactHorizontalScrollViewManager(),</span><br><span class="line">      <span class="keyword">new</span> ReactImageManager(),</span><br><span class="line">      <span class="keyword">new</span> ReactProgressBarViewManager(),</span><br><span class="line">      <span class="keyword">new</span> ReactRawTextManager(),</span><br><span class="line">      <span class="keyword">new</span> ReactScrollViewManager(),</span><br><span class="line">      <span class="keyword">new</span> ReactSwitchManager(),</span><br><span class="line">      <span class="keyword">new</span> ReactTextInputManager(),</span><br><span class="line">      <span class="keyword">new</span> ReactTextViewManager(),</span><br><span class="line">      <span class="keyword">new</span> ReactToolbarManager(),</span><br><span class="line">      <span class="keyword">new</span> ReactViewManager(),</span><br><span class="line">      <span class="keyword">new</span> ReactViewPagerManager(),</span><br><span class="line">      <span class="keyword">new</span> ReactTextInlineImageViewManager(),</span><br><span class="line">      <span class="keyword">new</span> ReactVirtualTextViewManager(),</span><br><span class="line">      <span class="keyword">new</span> SwipeRefreshLayoutManager());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>看了MainReactPackage中的代码，果不其然，首先我们看createViewManagers（）方法中的集合，看看集合子集的命名是不是很熟悉，<br>看看这里一共实现了多少原生控件：DrawerLayout、HorizontalScrollView、HorizontalScrollView、Image等等，还有SwipeRefreshLayout官网上还没有更新这个组件，其实这个版本已经可以使用了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>.<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReactDrawerLayoutManager</span> <span class="keyword">extends</span> <span class="title">ViewGroupManager</span>&lt;<span class="title">ReactDrawerLayout</span>&gt;</span><br><span class="line">2.<span class="title">public</span> <span class="title">class</span> <span class="title">ReactImageManager</span> <span class="keyword">extends</span> <span class="title">SimpleViewManager</span>&lt;<span class="title">ReactImageView</span>&gt;</span><br><span class="line">3.<span class="title">public</span> <span class="title">class</span> <span class="title">ReactProgressBarViewManager</span> <span class="keyword">extends</span> <span class="title">BaseViewManager</span>&lt;<span class="title">ProgressBarContainerView</span>, <span class="title">ProgressBarShadowNode</span>&gt;</span><br><span class="line">...</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//贴上一个ReactDrawerLayoutManager源码，大家看看实现</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReactDrawerLayoutManager</span> <span class="keyword">extends</span> <span class="title">ViewGroupManager</span>&lt;<span class="title">ReactDrawerLayout</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String REACT_CLASS = <span class="string">"AndroidDrawerLayout"</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> OPEN_DRAWER = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> CLOSE_DRAWER = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> REACT_CLASS;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">addEventEmitters</span><span class="params">(ThemedReactContext reactContext, ReactDrawerLayout view)</span> </span>&#123;</span><br><span class="line">    view.setDrawerListener(</span><br><span class="line">        <span class="keyword">new</span> DrawerEventEmitter(</span><br><span class="line">            view,</span><br><span class="line">            reactContext.getNativeModule(UIManagerModule.class).getEventDispatcher()));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">protected</span> ReactDrawerLayout <span class="title">createViewInstance</span><span class="params">(ThemedReactContext context)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ReactDrawerLayout(context);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@ReactProp</span>(name = <span class="string">"drawerPosition"</span>, defaultInt = Gravity.START)</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDrawerPosition</span><span class="params">(ReactDrawerLayout view, <span class="keyword">int</span> drawerPosition)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (Gravity.START == drawerPosition || Gravity.END == drawerPosition) &#123;</span><br><span class="line">      view.setDrawerPosition(drawerPosition);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> JSApplicationIllegalArgumentException(<span class="string">"Unknown drawerPosition "</span> + drawerPosition);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@ReactProp</span>(name = <span class="string">"drawerWidth"</span>, defaultFloat = Float.NaN)</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getDrawerWidth</span><span class="params">(ReactDrawerLayout view, <span class="keyword">float</span> width)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> widthInPx = Float.isNaN(width) ?</span><br><span class="line">        ReactDrawerLayout.DEFAULT_DRAWER_WIDTH : Math.round(PixelUtil.toPixelFromDIP(width));</span><br><span class="line">    view.setDrawerWidth(widthInPx);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">needsCustomLayoutForChildren</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Return true, since DrawerLayout will lay out it's own children.</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">public</span> <span class="meta">@Nullable</span> <span class="function">Map&lt;String, Integer&gt; <span class="title">getCommandsMap</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> MapBuilder.of(<span class="string">"openDrawer"</span>, OPEN_DRAWER, <span class="string">"closeDrawer"</span>, CLOSE_DRAWER);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">receiveCommand</span><span class="params">(</span><br><span class="line">      ReactDrawerLayout root,</span><br><span class="line">      <span class="keyword">int</span> commandId,</span><br><span class="line">      @Nullable ReadableArray args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">switch</span> (commandId) &#123;</span><br><span class="line">      <span class="keyword">case</span> OPEN_DRAWER:</span><br><span class="line">        root.openDrawer();</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> CLOSE_DRAWER:</span><br><span class="line">        root.closeDrawer();</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">public</span> <span class="meta">@Nullable</span> <span class="function">Map <span class="title">getExportedViewConstants</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> MapBuilder.of(</span><br><span class="line">        <span class="string">"DrawerPosition"</span>,</span><br><span class="line">        MapBuilder.of(<span class="string">"Left"</span>, Gravity.START, <span class="string">"Right"</span>, Gravity.END));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">public</span> <span class="meta">@Nullable</span> <span class="function">Map <span class="title">getExportedCustomDirectEventTypeConstants</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> MapBuilder.of(</span><br><span class="line">        DrawerSlideEvent.EVENT_NAME, MapBuilder.of(<span class="string">"registrationName"</span>, <span class="string">"onDrawerSlide"</span>),</span><br><span class="line">        DrawerOpenedEvent.EVENT_NAME, MapBuilder.of(<span class="string">"registrationName"</span>, <span class="string">"onDrawerOpen"</span>),</span><br><span class="line">        DrawerClosedEvent.EVENT_NAME, MapBuilder.of(<span class="string">"registrationName"</span>, <span class="string">"onDrawerClose"</span>),</span><br><span class="line">        DrawerStateChangedEvent.EVENT_NAME, MapBuilder.of(</span><br><span class="line">            <span class="string">"registrationName"</span>, <span class="string">"onDrawerStateChanged"</span>));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span><br><span class="line">   * This method is overridden because of two reasons:</span><br><span class="line">   * 1. A drawer must have exactly two children</span><br><span class="line">   * 2. The second child that is added, is the navigationView, which gets panned from the side.</span><br><span class="line">   */</span></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addView</span><span class="params">(ReactDrawerLayout parent, View child, <span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (getChildCount(parent) &gt;= <span class="number">2</span>) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span></span><br><span class="line">          JSApplicationIllegalArgumentException(<span class="string">"The Drawer cannot have more than two children"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (index != <span class="number">0</span> &amp;&amp; index != <span class="number">1</span>) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> JSApplicationIllegalArgumentException(</span><br><span class="line">          <span class="string">"The only valid indices for drawer's child are 0 or 1. Got "</span> + index + <span class="string">" instead."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    parent.addView(child, index);</span><br><span class="line">    parent.setDrawerProperties();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">DrawerEventEmitter</span> <span class="keyword">implements</span> <span class="title">DrawerLayout</span>.<span class="title">DrawerListener</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> DrawerLayout mDrawerLayout;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> EventDispatcher mEventDispatcher;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DrawerEventEmitter</span><span class="params">(DrawerLayout drawerLayout, EventDispatcher eventDispatcher)</span> </span>&#123;</span><br><span class="line">      mDrawerLayout = drawerLayout;</span><br><span class="line">      mEventDispatcher = eventDispatcher;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDrawerSlide</span><span class="params">(View view, <span class="keyword">float</span> v)</span> </span>&#123;</span><br><span class="line">      mEventDispatcher.dispatchEvent(</span><br><span class="line">          <span class="keyword">new</span> DrawerSlideEvent(mDrawerLayout.getId(), SystemClock.uptimeMillis(), v));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDrawerOpened</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">      mEventDispatcher.dispatchEvent(</span><br><span class="line">        <span class="keyword">new</span> DrawerOpenedEvent(mDrawerLayout.getId(), SystemClock.uptimeMillis()));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDrawerClosed</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">      mEventDispatcher.dispatchEvent(</span><br><span class="line">          <span class="keyword">new</span> DrawerClosedEvent(mDrawerLayout.getId(), SystemClock.uptimeMillis()));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDrawerStateChanged</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">      mEventDispatcher.dispatchEvent(</span><br><span class="line">          <span class="keyword">new</span> DrawerStateChangedEvent(mDrawerLayout.getId(), SystemClock.uptimeMillis(), i));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 原生控件的实现步骤、方法、例子等其实在源码中都有了，想实现什么组件就照着源码开发，绝不会出错啦。</p>
+<p>到此只是完成了android端的java代码，那么组件如何与js代码联系起来，并且供js代码调用呢，我们来看看工程中的react-navie文件夹吧，秘密都在它里面。<br>react-navie文件结构：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-a73ac5ed4279d3b4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="QQ20151218-1@2x.png"></p>
+<p>打开react-native文件夹，我一眼就注意到了ReactAndroid目录（因为做Android嘛，对含有Android的词比较敏感&gt;_&lt;）， 翻遍了其下所有的目录文件，终于找到一个有用点的文件package.json，在其中找到关键的一句话<br>【”main”: “Libraries/react-native/react-native.js”】图上用红框标注了。<br>下一步就该看看Libraries目录了，Libraries目录结构：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-5667c109ff94e90a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="QQ20151218-0@2x.png"></p>
+<p>图上我用红框标注了几个我们熟悉的控件命名的文件家，我们重点关注两个文件夹<br>Components与CustomComponents  我们看看里面有什么：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-6d0e64d3bcd7f9b1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="QQ20151218-2@2x.png"></p>
+<p>红线标注的控件是不是很熟悉，我们随便找一个控件进去看看，就看DrawerAndroid吧，截图如下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-ff57d8bf787a86d5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="QQ20151218-4@2x.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-855f138b880ddeec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="QQ20151218-3@2x.png"></p>
+<p>大家遇到的各种不解之处，其实大部分都可以在源码中得到解答，我也在继续学习中，我只是和大家分享我学习的过程，我也只是顺藤摸瓜了解了如何方便的去自定义组件。其实里面的好多ES6语法我也不是特别理解，只是照猫画虎。欢迎大家来吐槽&gt;_&lt;。</p>
+<p><a href="http://www.jianshu.com/p/07b928feee3b" target="_blank" rel="external">1.如何自定义react-native的android组件（一）</a><br><a href="http://www.jianshu.com/p/e35cf5cc1312" target="_blank" rel="external">3.react-native-0.16.1 自定义Android组件部分的源码初探</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/03/08/react native two/">如何创建一个android的react-native组件（二）</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 zzyyppqq 的个人博客">zzyyppqq</a></p>
+        <p><span>发布时间:</span>2016年03月08日 - 11时48分</p>
+        <p><span>最后更新:</span>2016年03月08日 - 23时10分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/03/08/react native two/" title="如何创建一个android的react-native组件（二）">http://zzyyppqq.github.io/2016/03/08/react native two/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://zzyyppqq.github.io/2016/03/08/react native two/　　作者: zzyyppqq" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/03/08/react native source/">
+                    react-native-0.16.1 自定义Android组件部分的源码初探
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/03/04/react native one/">
+                    如何创建一个android的react-native组件（一）
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#开始"><span class="toc-number">1.</span> <span class="toc-text">开始</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Install"><span class="toc-number"></span> <span class="toc-text">Install</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Step-1-Install-the-npm-package"><span class="toc-number">1.</span> <span class="toc-text">Step 1 - Install the npm package</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Step-2-Update-Gradle-Settings"><span class="toc-number">2.</span> <span class="toc-text">Step 2 - Update Gradle Settings</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Step-3-Update-app-Gradle-Build"><span class="toc-number">3.</span> <span class="toc-text">Step 3 - Update app Gradle Build</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Step-4-Register-React-Package"><span class="toc-number">4.</span> <span class="toc-text">Step 4 - Register React Package</span></a></li></ol>
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+    <div class="share">
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+    <a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a>
+    <a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+    </div>
+    <script>
+        window._bd_share_config={
+            "common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+</div>
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2016/03/08/react native two/" data-title="如何创建一个android的react-native组件（二）" data-url="http://zzyyppqq.github.io/2016/03/08/react native two/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zzyyppqq"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        <!-- ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/js/embed.js';-->
+        ds.src = 'https://zzyyppqq.github.io/js/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/03/08/react native source/" title="上一篇: react-native-0.16.1 自定义Android组件部分的源码初探">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/03/04/react native one/" title="下一篇: 如何创建一个android的react-native组件（一）">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/03/08/github_open_project/">GitHub上一些超炫的Android开源项目推荐</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/08/android_soft_plug/">让Android开发者相见恨晚的软件及插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/08/as_gradle-experimental/">Android Studio使用gradle-experimental构建NDK工程(无需Android.mk、Application.mk文件)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/08/react native source/">react-native-0.16.1 自定义Android组件部分的源码初探</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/08/react native two/">如何创建一个android的react-native组件（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/react native one/">如何创建一个android的react-native组件（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/as_jni/">超级简单的Android Studio jni 实现(无需命令行)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/android_retrofit_php/">Android端使用retrofit上传多张图片，后端使用Php接收图片(包含前后端代码)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/android_info/">Android开发相关</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2016 zzyyppqq
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的静态博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减双栏 Hexo 博客主题">Yelee</a> by MOxFIVE
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+    <script src="/js/GithubRepoWidget.js"></script>
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+
+    <script src="//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

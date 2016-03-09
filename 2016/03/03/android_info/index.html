@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android开发相关 | zzyyppqq的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1.Android Weekly中文版、Android Weekly英文版
+ Android Weekly 相当于是 Android 开发社区的实时通讯录，每周报道 Android 最新讯息，包括新的库、工具和博客等，只要你有 Email，就可以对其进行订阅，了解更多关于 Android 的消息。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android开发相关">
+<meta property="og:url" content="http://zzyyppqq.github.io/2016/03/03/android_info/index.html">
+<meta property="og:site_name" content="zzyyppqq的个人博客">
+<meta property="og:description" content="1.Android Weekly中文版、Android Weekly英文版
+ Android Weekly 相当于是 Android 开发社区的实时通讯录，每周报道 Android 最新讯息，包括新的库、工具和博客等，只要你有 Email，就可以对其进行订阅，了解更多关于 Android 的消息。">
+<meta property="og:updated_time" content="2016-03-08T15:29:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android开发相关">
+<meta name="twitter:description" content="1.Android Weekly中文版、Android Weekly英文版
+ Android Weekly 相当于是 Android 开发社区的实时通讯录，每周报道 Android 最新讯息，包括新的库、工具和博客等，只要你有 Email，就可以对其进行订阅，了解更多关于 Android 的消息。">
+  
+    <link rel="alternative" href="/atom.xml" title="zzyyppqq的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/avatar.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  
+      <link href="//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false,
+      }
+  </script>
+
+  
+      <script>
+          yiliaConfig.rootUrl = "/";
+      </script>
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">zzyyppqq</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">Android知识分享</p>
+        
+        
+        <form><input type="text" class="search" placeholder=" Search..."></form>
+                
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:hnszyp@126.com" title="Email"></a></li>
+                            
+                                <li id="简书"><a class="简书" target="_blank" href="http://www.jianshu.com/users/4a633d456ac7/latest_articles" title="简书"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/zzyyppqq" title="GitHub"></a></li>
+                            
+                                <li id="StackOverflow"><a class="StackOverflow" target="_blank" href="#" title="StackOverflow"></a></li>
+                            
+                                <li id="新浪微博"><a class="新浪微博" target="_blank" href="/sina weibo" title="新浪微博"></a></li>
+                            
+                                <li id="V2EX"><a class="V2EX" target="_blank" href="#" title="V2EX"></a></li>
+                            
+                                <li id="知乎"><a class="知乎" target="_blank" href="/zhihu" title="知乎"></a></li>
+                            
+                                <li id="豆瓣"><a class="豆瓣" target="_blank" href="/douban" title="豆瓣"></a></li>
+                            
+                                <li id="SegmentFault"><a class="SegmentFault" target="_blank" href="/" title="SegmentFault"></a></li>
+                            
+                                <li id="网易云音乐"><a class="网易云音乐" target="_blank" href="/netease" title="网易云音乐"></a></li>
+                            
+                                <li id="Facebook"><a class="Facebook" target="_blank" href="#" title="Facebook"></a></li>
+                            
+                                <li id="Google"><a class="Google" target="_blank" href="#" title="Google"></a></li>
+                            
+                                <li id="Twitter"><a class="Twitter" target="_blank" href="#" title="Twitter"></a></li>
+                            
+                                <li id="LinkedIn"><a class="LinkedIn" target="_blank" href="#" title="LinkedIn"></a></li>
+                            
+                                <li id="QQ"><a class="QQ" target="_blank" href="#" title="QQ"></a></li>
+                            
+                                <li id="微信"><a class="微信" target="_blank" href="/Wechat" title="微信"></a></li>
+                            
+                                <li id="PayPal"><a class="PayPal" target="_blank" href="#" title="PayPal"></a></li>
+                            
+                                <li id="Instagram"><a class="Instagram" target="_blank" href="#" title="Instagram"></a></li>
+                            
+                                <li id="Flickr"><a class="Flickr" target="_blank" href="#" title="Flickr"></a></li>
+                            
+                                <li id="reddit"><a class="reddit" target="_blank" href="/" title="reddit"></a></li>
+                            
+                                <li id="Medium"><a class="Medium" target="_blank" href="/" title="Medium"></a></li>
+                            
+                                <li id="TiddlyWiki"><a class="TiddlyWiki" target="_blank" href="/" title="TiddlyWiki"></a></li>
+                            
+                                <li id="Tumblr"><a class="Tumblr" target="_blank" href="/" title="Tumblr"></a></li>
+                            
+                                <li id="_500px"><a class="_500px" target="_blank" href="/" title="_500px"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/android/" style="font-size: 20px;">android</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/react-native/" style="font-size: 15px;">react-native</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://zzyyppqq.github.io/">zzyyppqq</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于Android</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">zzyyppqq</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">zzyyppqq</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">Android知识分享</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:hnszyp@126.com" title="Email"></a></li>
+                            
+                                <li id="简书"><a class="简书" target="_blank" href="http://www.jianshu.com/users/4a633d456ac7/latest_articles" title="简书"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/zzyyppqq" title="GitHub"></a></li>
+                            
+                                <li id="StackOverflow"><a class="StackOverflow" target="_blank" href="#" title="StackOverflow"></a></li>
+                            
+                                <li id="新浪微博"><a class="新浪微博" target="_blank" href="/sina weibo" title="新浪微博"></a></li>
+                            
+                                <li id="V2EX"><a class="V2EX" target="_blank" href="#" title="V2EX"></a></li>
+                            
+                                <li id="知乎"><a class="知乎" target="_blank" href="/zhihu" title="知乎"></a></li>
+                            
+                                <li id="豆瓣"><a class="豆瓣" target="_blank" href="/douban" title="豆瓣"></a></li>
+                            
+                                <li id="SegmentFault"><a class="SegmentFault" target="_blank" href="/" title="SegmentFault"></a></li>
+                            
+                                <li id="网易云音乐"><a class="网易云音乐" target="_blank" href="/netease" title="网易云音乐"></a></li>
+                            
+                                <li id="Facebook"><a class="Facebook" target="_blank" href="#" title="Facebook"></a></li>
+                            
+                                <li id="Google"><a class="Google" target="_blank" href="#" title="Google"></a></li>
+                            
+                                <li id="Twitter"><a class="Twitter" target="_blank" href="#" title="Twitter"></a></li>
+                            
+                                <li id="LinkedIn"><a class="LinkedIn" target="_blank" href="#" title="LinkedIn"></a></li>
+                            
+                                <li id="QQ"><a class="QQ" target="_blank" href="#" title="QQ"></a></li>
+                            
+                                <li id="微信"><a class="微信" target="_blank" href="/Wechat" title="微信"></a></li>
+                            
+                                <li id="PayPal"><a class="PayPal" target="_blank" href="#" title="PayPal"></a></li>
+                            
+                                <li id="Instagram"><a class="Instagram" target="_blank" href="#" title="Instagram"></a></li>
+                            
+                                <li id="Flickr"><a class="Flickr" target="_blank" href="#" title="Flickr"></a></li>
+                            
+                                <li id="reddit"><a class="reddit" target="_blank" href="/" title="reddit"></a></li>
+                            
+                                <li id="Medium"><a class="Medium" target="_blank" href="/" title="Medium"></a></li>
+                            
+                                <li id="TiddlyWiki"><a class="TiddlyWiki" target="_blank" href="/" title="TiddlyWiki"></a></li>
+                            
+                                <li id="Tumblr"><a class="Tumblr" target="_blank" href="/" title="Tumblr"></a></li>
+                            
+                                <li id="_500px"><a class="_500px" target="_blank" href="/" title="_500px"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-android_info" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/03/android_info/" class="article-date">
+      <time datetime="2016-03-03T13:00:49.000Z" itemprop="datePublished">2016-03-03</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android开发相关
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>1.<a href="http://wiki.jikexueyuan.com/project/android-weekly/issue-194/index.html" target="_blank" rel="external">Android Weekly中文版</a><a href="http://androidweekly.net/" target="_blank" rel="external">、Android Weekly英文版</a></p>
+<p> Android Weekly 相当于是 Android 开发社区的实时通讯录，每周报道 Android 最新讯息，包括新的库、工具和博客等，只要你有 Email，就可以对其进行订阅，了解更多关于 Android 的消息。<br><a id="more"></a><br>2.<a href="http://android-developers.blogspot.com/" target="_blank" rel="external">Android Developers Blog 英文版</a></p>
+<p> Android Developers Blog</p>
+<p>3.<a href="http://www.androiddevtools.cn/" target="_blank" rel="external">AndroidDevTools 中文版</a></p>
+<p> Android Dev Tools (官网地址：www.androiddevtools.cn)<br>收集整理Android开发所需的Android SDK、开发中用到的工具、Android开发教程、Android设计规范，免费的设计素材等。欢迎大家推荐自己在Android开发过程中用的好用的工具、学习开发教程、用到设计素材</p>
+<p>4.<a href="http://android-arsenal.com/" target="_blank" rel="external">Android Arsena 英文版(UI)</a></p>
+<p>  Android developer portal with tools, libraries, and apps</p>
+<p>5.<a href="https://github.com/Trinea/android-open-project" target="_blank" rel="external">android-open-project 中文版(Trinea UI)</a></p>
+<p> android-open-project</p>
+<p>6.<a href="http://www.appance.com/category/android/" target="_blank" rel="external">appance 英文版(UI)</a></p>
+<p> Android、iOS 、Windows Phone等开源项目</p>
+<p>7.<a href="http://www.stormzhang.com/android/2014/06/05/android-awesome-resources/" target="_blank" rel="external">整理的Android开发资源(stormzhang)</a></p>
+<p> 整理的Android开发资源</p>
+<p>8.<a href="http://a.codekk.com" target="_blank" rel="external">codekk 中文版(UI)</a></p>
+<p> codekk 源码解析 开源项目  </p>
+<p>9.<a href="http://www.stormzhang.com/android/2014/07/07/learn-android-from-rookie/" target="_blank" rel="external">Android学习之路 (stormzhang)</a></p>
+<p> Android学习之路  </p>
+<p>10.<a href="http://blog.csdn.net/lmj623565791/article/category/2680595" target="_blank" rel="external">Android自定义控件实战 (Hongyang UI)</a></p>
+<p> Android自定义控件实战</p>
+<p>11.<a href="http://tech.meituan.com/mt-apk-packaging.html" target="_blank" rel="external">美团Android自动化之旅—生成渠道包 </a></p>
+<p> 每当发新版本时，美团团购Android客户端会被分发到各个应用市场，比如豌豆荚，360手机助手等。为了统计这些市场的效果（活跃数，下单数等），需要有一种方法来唯一标识它们。</p>
+<p>12.<a href="http://www.imooc.com/" target="_blank" rel="external">慕课网 (Video)</a></p>
+<p> 慕课网-国内最大的IT技能学习平台</p>
+<p>13.<a href="http://www.cnblogs.com/purediy/p/3498184.html" target="_blank" rel="external">Android开发者必备的42个网站</a></p>
+<p> Android开发者必备的42个链接</p>
+<p>14.<a href="https://github.com/sindresorhus/quick-look-plugins" target="_blank" rel="external">quick-look-plugins</a></p>
+<p> OSX系统 quick-look-plugins</p>
+<p>15.<a href="https://dribbble.com/shots/1945376-Search" target="_blank" rel="external">dribbble</a></p>
+<p> 设计、动效相关</p>
+<p>16.<a href="http://jcodecraeer.com/a/anzhuokaifa/Android_Studio/2015/1009/3557.html" target="_blank" rel="external">推荐几款实用的Android Studio 插件</a></p>
+<p> 推荐几款实用的Android Studio 插件</p>
+<p>17.<a href="http://www.csdn.net/article/2015-09-24/2825787-react-native" target="_blank" rel="external">react-native环境配置</a></p>
+<p>18.<a href="https://github.com/ele828/react-native-guide" target="_blank" rel="external">React-Native学习指南</a></p>
+<p>React-Native指南汇集了react-native学习资源与各类开源app</p>
+<p>19.<a href="http://facebook.github.io/react-native/docs/view.html#content" target="_blank" rel="external">react-native</a></p>
+<p>20.个人博客制作<a href="http://blog.csdn.net/kesalin/article/details/7184387" target="_blank" rel="external">wordpress</a></p>
+<p>21.Android换肤实现收集<a href="https://github.com/bboyfeiyu/Colorful" target="_blank" rel="external">Colorful</a> ,<br><a href="https://github.com/hongyangAndroid/ChangeSkin" target="_blank" rel="external">ChangeSkin</a>,<a href="https://github.com/fengjundev/Android-Skin-Loader" target="_blank" rel="external">Android-Skin-Loader</a>,<a href="https://github.com/ashqal/NightOwl" target="_blank" rel="external">NightOwl</a>,<a href="https://github.com/dersoncheng/MultipleTheme" target="_blank" rel="external">MultipleTheme(实现有点重)</a></p>
+<p>22.<a href="https://github.com/justjavac/free-programming-books-zh_CN" target="_blank" rel="external">免费的编程中文书籍索引</a></p>
+<p>23.<a href="https://github.com/tangqi92/Android-Tips" target="_blank" rel="external">Android-Tips</a></p>
+<p>24.<a href="https://github.com/wequick/Small" target="_blank" rel="external">Small</a><a href="https://github.com/CtripMobile/DynamicAPK" target="_blank" rel="external">、携程DynamicAPK</a><a href="https://github.com/jasonross/Nuwa" target="_blank" rel="external">、Nuwa(ClassLoader)</a><a href="https://github.com/dodola/HotFix" target="_blank" rel="external">、HotFix(ClassLoader)</a><a href="https://github.com/bunnyblue/DroidFix" target="_blank" rel="external">、DroidFix(ClassLoader)</a><a href="https://github.com/alibaba/AndFix" target="_blank" rel="external">、AndFix(无法添加类和字段)</a><a href="https://github.com/alibaba/dexposed" target="_blank" rel="external">、 Dexposed(不支持art)</a> <a href="http://link.zhihu.com/?target=https%3A//github.com/houkx/android-pluginmgr" target="_blank" rel="external"> 、android-pluginmgr</a> <a href="http://link.zhihu.com/?target=https%3A//github.com/singwhatiwanna/dynamic-load-apk" target="_blank" rel="external"> 、dynamic-load-apk</a> <a href="http://link.zhihu.com/?target=https%3A//github.com/Qihoo360/DroidPlugin" target="_blank" rel="external"> 、DroidPlugin(360)</a> <a href="http://link.zhihu.com/?target=https%3A//github.com/rovo89/Xposed" target="_blank" rel="external"> 、Xposed</a> <a href="http://link.zhihu.com/?target=https%3A//github.com/skylot/jadx" target="_blank" rel="external"> 、jadx</a> <a href="http://link.zhihu.com/?target=https%3A//github.com/pxb1988/dex2jar" target="_blank" rel="external">、dex2jar</a> <a href="http://link.zhihu.com/?target=https%3A//github.com/crittercism/dexmaker" target="_blank" rel="external">、dexmaker</a><a href="http://link.zhihu.com/?target=https%3A//github.com/mihaip/dex-method-counts" target="_blank" rel="external">、dex-method-counts</a><a href="http://link.zhihu.com/?target=http%3A//www.apkplug.com/" target="_blank" rel="external">、ApkPlug-移动应用模块化解决方案</a> <a href="http://link.zhihu.com/?target=http%3A//mp.weixin.qq.com/s%3F__biz%3DMzIwMTA2MjMxNA%3D%3D%26mid%3D211048871%26idx%3D1%26sn%3Dd6c7deb1dbd3f4b228a4f525ba14ebf6%26scene%3D5%23rd" target="_blank" rel="external">Android插件化的一种实现(乐视分享的插件化解决方案)</a><a href="http://www.trinea.cn/android/android-plugin/" target="_blank" rel="external">、利用 DexClassLoader 实现 Android 插件化，从而达到动态加载</a>  </p>
+<p>热更新、热修复</p>
+<p>25.<a href="http://zhuanlan.zhihu.com/magilu/20308548" target="_blank" rel="external">安卓App热补丁动态修复技术介绍(QQ空间终端开发团队ClassLoader)</a></p>
+<p>26,<a href="http://blog.zhaiyifan.cn/2015/11/20/HotPatchCompare/" target="_blank" rel="external">各大热补丁方案分析和比较</a></p>
+<p>27.<a href="http://blog.csdn.net/qxs965266509/article/details/49802429" target="_blank" rel="external">Alibaba-AndFix Bug热修复框架的使用</a></p>
+<p>28.<a href="http://blog.csdn.net/xwl198937/article/details/49801975" target="_blank" rel="external">基于cydia Hook在线热修复补丁方案</a></p>
+<p>29.<a href="http://www.mamicode.com/info-detail-1031299.html" target="_blank" rel="external">Android分包MultiDex原理详解</a></p>
+<p>30.<a href="http://geek.csdn.net/news/detail/49303" target="_blank" rel="external">Android插件化集合</a></p>
+<p>31.<a href="http://blog.csdn.net/theone10211024/article/details/50435325" target="_blank" rel="external">可能是东半球最全的RxJava使用场景小结</a></p>
+<p>32.<a href="http://jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/1226/3807.html" target="_blank" rel="external">代替sqlite的库Realm</a></p>
+<p>33.<a href="https://github.com/geeeeeeeeek/git-recipes/wiki" target="_blank" rel="external">git中文教程大全</a></p>
+<p>34.<a href="https://github.com/chanjarster/weixin-java-tools" target="_blank" rel="external">微信公众号java SDK开发</a></p>
+<p>35.<a href="https://github.com/geeeeeeeeek/WeChatLuckyMoney" target="_blank" rel="external">WeChatLuckyMoney</a></p>
+<p>首先这是一个能够让你的钱包鼓起来的开源项目，其次才是一个罕见的项目。该项目利用Android的无障碍服务功能实现了一款微信抢红包插件。该项目的原理是实时进行屏幕内容检测，然后在特定的时刻进行自动化点击。</p>
+<p>36.<a href="https://github.com/arimorty/floatingsearchview" target="_blank" rel="external">floatingsearchview</a></p>
+<p>floatingsearchview实现了浮动搜索界面。搜索功能是最常用的功能之一，开发者可以通过几行代码将该功能添加到自己的工程中</p>
+<p>37.<a href="http://weibo.com/p/1001603915353695642424?sudaref=forum.memect.com" target="_blank" rel="external">Scalpel</a></p>
+<p>JakeWharton是Android武林界的绝世高手,他有三把好刀：Dagger、ButterKnife、Scalpel。Scalpel能够查看布局层次结构三维效果。只需要简单几行代码就可以将Scalpel集成到我们的应用中，然后就能够将布局层次结构进行三维效果的展示，同时支持三维的移动和缩放，效果十分炫酷。</p>
+<p>38.<a href="http://chinagdg.org/" target="_blank" rel="external">欢迎来到谷歌开发者社区(GDG) —— 开放 · 分享 · 创新</a></p>
+<p>39.<a href="https://github.com/google/android-classyshark" target="_blank" rel="external">classyshark</a></p>
+<p>这是一个非常有意思的项目，能够将你的代码重新排版。请大家移步项目地址，直接很效果图。</p>
+<p>40.<a href="https://github.com/desmond1121/Android-Ptr-Comparison" target="_blank" rel="external">Android-Ptr-Comparison</a></p>
+<p>百万哥说是史上最强的下拉刷新类库分析，没有之一。</p>
+<p>41.移动端前端框架UI库（Frozen UI、WeUI、SUI Mobile、mui、Bootstrap）</p>
+<p>42.<a href="http://webres.wang/javascript-resources-2015-first/" target="_blank" rel="external">2015年50+ JavaScript 工具、资源合集</a></p>
+<p>43.<a href="http://fex.baidu.com/blog/2015/12/fex-weekly-14/" target="_blank" rel="external">前段技术周刊</a></p>
+<p>44.<a href="http://blog.csdn.net/tiankong1206/article/details/45967935" target="_blank" rel="external">Dagger2基础</a></p>
+<p>45.<a href="https://github.com/snowdream/awesome-android" target="_blank" rel="external">awesome-android有索引的开源项目大集合</a></p>
+<p>46.<a href="http://www1.w3cfuns.com/course.php" target="_blank" rel="external">前端网（移动web开发）</a></p>
+<p>47.<a href="http://www.51xuediannao.com/html5/834.html" target="_blank" rel="external">移动端web开发技巧与经验分享</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/03/03/android_info/">Android开发相关</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 zzyyppqq 的个人博客">zzyyppqq</a></p>
+        <p><span>发布时间:</span>2016年03月03日 - 21时00分</p>
+        <p><span>最后更新:</span>2016年03月08日 - 23时29分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/03/03/android_info/" title="Android开发相关">http://zzyyppqq.github.io/2016/03/03/android_info/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://zzyyppqq.github.io/2016/03/03/android_info/　　作者: zzyyppqq" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/03/03/android_retrofit_php/">
+                    Android端使用retrofit上传多张图片，后端使用Php接收图片(包含前后端代码)
+                </a>
+            </div>
+        
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+    <div class="share">
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+    <a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a>
+    <a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+    </div>
+    <script>
+        window._bd_share_config={
+            "common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+</div>
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2016/03/03/android_info/" data-title="Android开发相关" data-url="http://zzyyppqq.github.io/2016/03/03/android_info/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zzyyppqq"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        <!-- ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/js/embed.js';-->
+        ds.src = 'https://zzyyppqq.github.io/js/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/03/03/android_retrofit_php/" title="上一篇: Android端使用retrofit上传多张图片，后端使用Php接收图片(包含前后端代码)">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/03/08/github_open_project/">GitHub上一些超炫的Android开源项目推荐</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/08/android_soft_plug/">让Android开发者相见恨晚的软件及插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/08/as_gradle-experimental/">Android Studio使用gradle-experimental构建NDK工程(无需Android.mk、Application.mk文件)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/08/react native source/">react-native-0.16.1 自定义Android组件部分的源码初探</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/08/react native two/">如何创建一个android的react-native组件（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/react native one/">如何创建一个android的react-native组件（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/as_jni/">超级简单的Android Studio jni 实现(无需命令行)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/android_retrofit_php/">Android端使用retrofit上传多张图片，后端使用Php接收图片(包含前后端代码)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/android_info/">Android开发相关</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2016 zzyyppqq
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的静态博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减双栏 Hexo 博客主题">Yelee</a> by MOxFIVE
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+    <script src="/js/GithubRepoWidget.js"></script>
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+
+    <script src="//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

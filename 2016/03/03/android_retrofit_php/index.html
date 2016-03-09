@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android端使用retrofit上传多张图片，后端使用Php接收图片(包含前后端代码) | zzyyppqq的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1.先列出Android端使用的library：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android端使用retrofit上传多张图片，后端使用Php接收图片(包含前后端代码)">
+<meta property="og:url" content="http://zzyyppqq.github.io/2016/03/03/android_retrofit_php/index.html">
+<meta property="og:site_name" content="zzyyppqq的个人博客">
+<meta property="og:description" content="1.先列出Android端使用的library：">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-db823f2b3afeeca9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-a44613c9217277b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-4879fc7b39cc572f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-03-08T15:09:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android端使用retrofit上传多张图片，后端使用Php接收图片(包含前后端代码)">
+<meta name="twitter:description" content="1.先列出Android端使用的library：">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1226849-db823f2b3afeeca9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+  
+    <link rel="alternative" href="/atom.xml" title="zzyyppqq的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/avatar.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
+  
+  
+      <link href="//cdn.bootcss.com/jqueryui/1.10.4/css/jquery-ui.min.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <script>
+      var yiliaConfig = {
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false,
+      }
+  </script>
+
+  
+      <script>
+          yiliaConfig.rootUrl = "/";
+      </script>
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/img/avatar.png" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">zzyyppqq</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">Android知识分享</p>
+        
+        
+        <form><input type="text" class="search" placeholder=" Search..."></form>
+                
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                            <li><a href="/about/">关于我</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:hnszyp@126.com" title="Email"></a></li>
+                            
+                                <li id="简书"><a class="简书" target="_blank" href="http://www.jianshu.com/users/4a633d456ac7/latest_articles" title="简书"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/zzyyppqq" title="GitHub"></a></li>
+                            
+                                <li id="StackOverflow"><a class="StackOverflow" target="_blank" href="#" title="StackOverflow"></a></li>
+                            
+                                <li id="新浪微博"><a class="新浪微博" target="_blank" href="/sina weibo" title="新浪微博"></a></li>
+                            
+                                <li id="V2EX"><a class="V2EX" target="_blank" href="#" title="V2EX"></a></li>
+                            
+                                <li id="知乎"><a class="知乎" target="_blank" href="/zhihu" title="知乎"></a></li>
+                            
+                                <li id="豆瓣"><a class="豆瓣" target="_blank" href="/douban" title="豆瓣"></a></li>
+                            
+                                <li id="SegmentFault"><a class="SegmentFault" target="_blank" href="/" title="SegmentFault"></a></li>
+                            
+                                <li id="网易云音乐"><a class="网易云音乐" target="_blank" href="/netease" title="网易云音乐"></a></li>
+                            
+                                <li id="Facebook"><a class="Facebook" target="_blank" href="#" title="Facebook"></a></li>
+                            
+                                <li id="Google"><a class="Google" target="_blank" href="#" title="Google"></a></li>
+                            
+                                <li id="Twitter"><a class="Twitter" target="_blank" href="#" title="Twitter"></a></li>
+                            
+                                <li id="LinkedIn"><a class="LinkedIn" target="_blank" href="#" title="LinkedIn"></a></li>
+                            
+                                <li id="QQ"><a class="QQ" target="_blank" href="#" title="QQ"></a></li>
+                            
+                                <li id="微信"><a class="微信" target="_blank" href="/Wechat" title="微信"></a></li>
+                            
+                                <li id="PayPal"><a class="PayPal" target="_blank" href="#" title="PayPal"></a></li>
+                            
+                                <li id="Instagram"><a class="Instagram" target="_blank" href="#" title="Instagram"></a></li>
+                            
+                                <li id="Flickr"><a class="Flickr" target="_blank" href="#" title="Flickr"></a></li>
+                            
+                                <li id="reddit"><a class="reddit" target="_blank" href="/" title="reddit"></a></li>
+                            
+                                <li id="Medium"><a class="Medium" target="_blank" href="/" title="Medium"></a></li>
+                            
+                                <li id="TiddlyWiki"><a class="TiddlyWiki" target="_blank" href="/" title="TiddlyWiki"></a></li>
+                            
+                                <li id="Tumblr"><a class="Tumblr" target="_blank" href="/" title="Tumblr"></a></li>
+                            
+                                <li id="_500px"><a class="_500px" target="_blank" href="/" title="_500px"></a></li>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/android/" style="font-size: 20px;">android</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/tags/react-native/" style="font-size: 15px;">react-native</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://pages.github.com/">GitHub</a>
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="https://zzyyppqq.github.io/">zzyyppqq</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">专注于Android</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">zzyyppqq</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/img/avatar.png" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">zzyyppqq</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">Android知识分享</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                    <li><a href="/about/">关于我</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <li id="RSS"><a class="RSS" target="_blank" href="/atom.xml" title="RSS"></a></li>
+                            
+                                <li id="Email"><a class="Email" target="_blank" href="mailto:hnszyp@126.com" title="Email"></a></li>
+                            
+                                <li id="简书"><a class="简书" target="_blank" href="http://www.jianshu.com/users/4a633d456ac7/latest_articles" title="简书"></a></li>
+                            
+                                <li id="GitHub"><a class="GitHub" target="_blank" href="https://github.com/zzyyppqq" title="GitHub"></a></li>
+                            
+                                <li id="StackOverflow"><a class="StackOverflow" target="_blank" href="#" title="StackOverflow"></a></li>
+                            
+                                <li id="新浪微博"><a class="新浪微博" target="_blank" href="/sina weibo" title="新浪微博"></a></li>
+                            
+                                <li id="V2EX"><a class="V2EX" target="_blank" href="#" title="V2EX"></a></li>
+                            
+                                <li id="知乎"><a class="知乎" target="_blank" href="/zhihu" title="知乎"></a></li>
+                            
+                                <li id="豆瓣"><a class="豆瓣" target="_blank" href="/douban" title="豆瓣"></a></li>
+                            
+                                <li id="SegmentFault"><a class="SegmentFault" target="_blank" href="/" title="SegmentFault"></a></li>
+                            
+                                <li id="网易云音乐"><a class="网易云音乐" target="_blank" href="/netease" title="网易云音乐"></a></li>
+                            
+                                <li id="Facebook"><a class="Facebook" target="_blank" href="#" title="Facebook"></a></li>
+                            
+                                <li id="Google"><a class="Google" target="_blank" href="#" title="Google"></a></li>
+                            
+                                <li id="Twitter"><a class="Twitter" target="_blank" href="#" title="Twitter"></a></li>
+                            
+                                <li id="LinkedIn"><a class="LinkedIn" target="_blank" href="#" title="LinkedIn"></a></li>
+                            
+                                <li id="QQ"><a class="QQ" target="_blank" href="#" title="QQ"></a></li>
+                            
+                                <li id="微信"><a class="微信" target="_blank" href="/Wechat" title="微信"></a></li>
+                            
+                                <li id="PayPal"><a class="PayPal" target="_blank" href="#" title="PayPal"></a></li>
+                            
+                                <li id="Instagram"><a class="Instagram" target="_blank" href="#" title="Instagram"></a></li>
+                            
+                                <li id="Flickr"><a class="Flickr" target="_blank" href="#" title="Flickr"></a></li>
+                            
+                                <li id="reddit"><a class="reddit" target="_blank" href="/" title="reddit"></a></li>
+                            
+                                <li id="Medium"><a class="Medium" target="_blank" href="/" title="Medium"></a></li>
+                            
+                                <li id="TiddlyWiki"><a class="TiddlyWiki" target="_blank" href="/" title="TiddlyWiki"></a></li>
+                            
+                                <li id="Tumblr"><a class="Tumblr" target="_blank" href="/" title="Tumblr"></a></li>
+                            
+                                <li id="_500px"><a class="_500px" target="_blank" href="/" title="_500px"></a></li>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-android_retrofit_php" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/03/03/android_retrofit_php/" class="article-date">
+      <time datetime="2016-03-03T14:00:49.000Z" itemprop="datePublished">2016-03-03</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android端使用retrofit上传多张图片，后端使用Php接收图片(包含前后端代码)
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/">php</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>1.先列出Android端使用的library：<br><a id="more"></a><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">dependencies &#123;</span><br><span class="line">    ...</span><br><span class="line">    compile <span class="string">'com.jakewharton:butterknife:7.0.1'</span></span><br><span class="line">    compile <span class="string">'com.squareup:otto:1.3.5'</span></span><br><span class="line">    compile <span class="string">'cn.finalteam:galleryfinal:1.4.8.4'</span></span><br><span class="line">    compile <span class="string">'com.squareup.retrofit:retrofit:1.9.0'</span></span><br><span class="line">    compile <span class="string">'com.squareup.okhttp:okhttp-urlconnection:2.0.0'</span></span><br><span class="line">    compile <span class="string">'com.squareup.okhttp:okhttp:2.0.0'</span></span><br><span class="line">    compile <span class="string">'com.github.bumptech.glide:glide:3.6.1'</span></span><br><span class="line">    compile <span class="string">'com.jcodecraeer:xrecyclerview:1.2.6'</span></span><br><span class="line">    compile <span class="string">'com.baoyz.actionsheet:library:1.1.5'</span></span><br><span class="line">    compile <span class="string">'com.nostra13.universalimageloader:universal-image-loader:1.9.5'</span></span><br><span class="line">    compile <span class="string">'io.reactivex:rxjava:1.0.6'</span></span><br><span class="line">    compile <span class="string">'io.reactivex:rxandroid:0.23.0'</span></span><br><span class="line">    compile files(<span class="string">'libs/fastjson-1.2.7.jar'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Android端代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ApiService</span> </span>&#123;</span><br><span class="line"><span class="comment">//  上传一个文件/图片</span></span><br><span class="line">    <span class="meta">@Multipart</span></span><br><span class="line">    <span class="meta">@POST</span>(<span class="string">"/UploadFileDemo/android_upload_file/upload.php"</span>)</span><br><span class="line">    <span class="function">Observable&lt;Response&gt; <span class="title">uploadFile</span><span class="params">(@Part(<span class="string">"uploadfile"</span>)</span> TypedFile file)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//  上传多张图片</span></span><br><span class="line">    <span class="meta">@POST</span>(<span class="string">"/UploadFileDemo/android_upload_file/uploads.php"</span>)</span><br><span class="line">    <span class="function">Observable&lt;Response&gt; <span class="title">uploadFiles</span><span class="params">(@Body MultipartTypedOutput multipartTypedOutput)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> String API_URL = Constant.API_URL;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> ExecutorService mExecutorService;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> ApiService instance;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ApiService <span class="title">getServiceClient</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (Client.class) &#123;</span><br><span class="line">                <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    OkHttpClient okHttpClient = <span class="keyword">new</span> OkHttpClient();</span><br><span class="line">                    okHttpClient.setCookieHandler(<span class="keyword">new</span> MyCookieManager());</span><br><span class="line">                    okHttpClient.setReadTimeout(<span class="number">100</span>, TimeUnit.SECONDS);</span><br><span class="line">                    okHttpClient.setConnectTimeout(<span class="number">100</span>, TimeUnit.SECONDS);</span><br><span class="line"></span><br><span class="line">                    RestAdapter.Builder restAdapter = <span class="keyword">new</span> RestAdapter.Builder();</span><br><span class="line"></span><br><span class="line">                    restAdapter.setRequestInterceptor(<span class="keyword">new</span> ApiHeaders());</span><br><span class="line">                    restAdapter.setEndpoint(API_URL);</span><br><span class="line">                    restAdapter.setClient(<span class="keyword">new</span> OkClient(okHttpClient));</span><br><span class="line">                    restAdapter.setLogLevel(RestAdapter.LogLevel.FULL);</span><br><span class="line"></span><br><span class="line">                    mExecutorService = Executors.newCachedThreadPool();</span><br><span class="line">                    instance = restAdapter.build().create(ApiService.class);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">stopAll</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        List&lt;Runnable&gt; pendingAndOngoing = mExecutorService.shutdownNow();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MyCookieManager</span> <span class="keyword">extends</span> <span class="title">CookieManager</span> </span>&#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">(URI uri, Map&lt;String, List&lt;String&gt;&gt; stringListMap)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">            <span class="keyword">super</span>.put(uri, stringListMap);</span><br><span class="line">            <span class="keyword">if</span> (stringListMap != <span class="keyword">null</span> &amp;&amp; stringListMap.get(<span class="string">"Set-Cookie"</span>) != <span class="keyword">null</span>)</span><br><span class="line">                <span class="keyword">for</span> (String string : stringListMap.get(<span class="string">"Set-Cookie"</span>)) &#123;</span><br><span class="line">                    String cookieValue = string.substring(<span class="number">0</span>, string.indexOf(<span class="string">"\"; "</span>) + <span class="number">1</span>);</span><br><span class="line">                    <span class="keyword">if</span> (string.contains(<span class="string">"A2=\""</span>)) &#123;</span><br><span class="line">                        <span class="comment">//保存到应用</span></span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span> (string.contains(<span class="string">"PB3_SESSION=\""</span>)) &#123;</span><br><span class="line">                        <span class="comment">////保存到应用</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ApiHeaders</span> <span class="keyword">implements</span> <span class="title">RequestInterceptor</span> </span>&#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">intercept</span><span class="params">(RequestFacade request)</span> </span>&#123;</span><br><span class="line">            request.addHeader(<span class="string">"User-Agent"</span>, <span class="string">"Mozilla/5.0 (Linux; U; Android 4.1.1; zh-cn; HTC One X - 4.1.1 - API 16 - 720x1280 Build/JRO03S) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30"</span>);</span><br><span class="line">            request.addHeader(<span class="string">"Accept"</span>, <span class="string">"*/*"</span>);</span><br><span class="line">            request.addHeader(<span class="string">"Accept-Language"</span>, <span class="string">"zh-cn,zh"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上传关键代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用MultipartTypedOutput类来上传多张图片</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">uploadFiles</span><span class="params">(List&lt;String&gt; paths)</span> </span>&#123;</span><br><span class="line">        MultipartTypedOutput multipartTypedOutput = <span class="keyword">new</span> MultipartTypedOutput();</span><br><span class="line">        <span class="keyword">for</span> (String imgPath : paths)&#123;</span><br><span class="line">        <span class="comment">//注意“uploadfile[]”一定要带“[]”,表明上传的是数组，也就是多张图片,不能写“uploadfile”</span></span><br><span class="line">            multipartTypedOutput.addPart(<span class="string">"uploadfile[]"</span>, <span class="keyword">new</span> TypedFile(<span class="string">""</span>, <span class="keyword">new</span> File(imgPath)));</span><br><span class="line">        &#125;</span><br><span class="line">        mApi.uploadFiles(multipartTypedOutput)</span><br><span class="line">                .subscribeOn(Schedulers.computation())</span><br><span class="line">                .subscribe(response -&gt; handleUploadFile(response), error -&gt; handleFailure(error));</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"> <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">handleUploadFile</span><span class="params">(Response response)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    System.out.println(response.getUrl());</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        InputStream in = response.getBody().in();</span><br><span class="line">        String responseString = inputStream2String(in);</span><br><span class="line">        Log.i(<span class="string">"AAA"</span>, responseString);</span><br><span class="line">        <span class="comment">//解析json数据</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//otto事件传递</span></span><br><span class="line">        mBus.post(responseString);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//接收事件代码</span></span><br><span class="line"> <span class="meta">@Subscribe</span> <span class="comment">//需要注解@Subscribe ,表明在这个函数接收数据</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">uploadFileResponse</span><span class="params">(String response)</span> </span>&#123;</span><br><span class="line">    Message msg = JSON.parseObject(response, Message.class);</span><br><span class="line">    List&lt;String&gt; imgUrls = msg.getImgUrls();</span><br><span class="line">    <span class="keyword">if</span> (msg.getCode() == <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (choosePhotoListAdapter == <span class="keyword">null</span>) &#123;</span><br><span class="line">            choosePhotoListAdapter = <span class="keyword">new</span> ChoosePhotoListAdapter(<span class="keyword">this</span>, <span class="keyword">null</span>, imgUrls);</span><br><span class="line">            lvPhotoShow.setAdapter(choosePhotoListAdapter);</span><br><span class="line">        &#125;</span><br><span class="line">        choosePhotoListAdapter.notifyDataSetChanged();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Php端代码：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//初学php，写的比较简单，不太健壮，像图片是否已经上传过，都没有判断，大家自己补充啊^_^</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Created by PhpStorm.</span><br><span class="line"> * User: zhangyipeng</span><br><span class="line"> * Date: 16/2/18</span><br><span class="line"> * Time: 下午3:48</span><br><span class="line"> */</span></span><br><span class="line"></span><br><span class="line">$base_path = <span class="string">"./upload_file/"</span>; <span class="comment">//接收文件目录</span></span><br><span class="line">$imgs = <span class="keyword">array</span>();  <span class="comment">//定义一个数组存放上传图片的路径</span></span><br><span class="line">$isSave = <span class="keyword">false</span>;</span><br><span class="line"><span class="keyword">if</span> (!file_exists($base_path)) &#123;</span><br><span class="line">    mkdir($base_path);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span> ($_FILES[<span class="string">"uploadfile"</span>][<span class="string">"error"</span>] <span class="keyword">as</span> $key =&gt; $error) &#123;</span><br><span class="line">    <span class="keyword">if</span> ($error == UPLOAD_ERR_OK) &#123;</span><br><span class="line">        $tmp_name = $_FILES[<span class="string">"uploadfile"</span>][<span class="string">"tmp_name"</span>][$key];</span><br><span class="line">        $name = $_FILES[<span class="string">"uploadfile"</span>][<span class="string">"name"</span>][$key];</span><br><span class="line">        $uploadfile = $base_path . $name;</span><br><span class="line">        $isSave = move_uploaded_file($tmp_name, $uploadfile);</span><br><span class="line">        <span class="keyword">if</span> ($isSave)&#123;</span><br><span class="line">            $imgs[]=$uploadfile;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ($isSave) &#123;</span><br><span class="line">    $array = <span class="keyword">array</span>(<span class="string">"code"</span> =&gt; <span class="string">"1"</span>, <span class="string">"message"</span> =&gt;<span class="string">"上传图片成功"</span></span><br><span class="line">    , <span class="string">"imgUrls"</span> =&gt; $imgs);</span><br><span class="line">    <span class="keyword">echo</span> json_encode($array);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    $array = <span class="keyword">array</span>(<span class="string">"code"</span> =&gt; <span class="string">"0"</span>, <span class="string">"message"</span> =&gt; <span class="string">"上传图片失败,"</span> . $_FILES [<span class="string">'uploadfile'</span>] [<span class="string">'error'</span>]</span><br><span class="line">    , <span class="string">"imgUrls"</span> =&gt; $imgs);</span><br><span class="line">    <span class="keyword">echo</span> json_encode($array);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>其实上传成功的关键是part需要带uploadfile[] 。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">multipartTypedOutput.addPart(<span class="string">"uploadfile[]"</span>, <span class="keyword">new</span> TypedFile(<span class="string">""</span>, <span class="keyword">new</span> File(imgPath)));</span><br></pre></td></tr></table></figure></p>
+<p>我在这个地方失败了几十次，无意中看见html网页批量上传的name属性中带了[]，我就试了试，果然成功了。</p>
+<hr>
+<p><a href="http://download.csdn.net/detail/zzyyppqq/9435930" target="_blank" rel="external">代码资源下载</a></p>
+<hr>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-db823f2b3afeeca9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-a44613c9217277b3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>补充：php环境使用的是MAMP，文件所在目录如下，想要测试的可以看看</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-4879fc7b39cc572f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="php.png"><br>1.<a href="http://www.jianshu.com/p/e689d0196a17" target="_blank" rel="external">超级简单的Android Studio jni 实现(无需命令行)</a><br>2.<a href="http://www.jianshu.com/p/211369defbb5" target="_blank" rel="external">让Android开发者相见恨晚的软件及插件</a><br>3.<a href="http://www.jianshu.com/p/dbaac3ac9aee" target="_blank" rel="external">GitHub上一些超炫的Android开源项目推荐</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2016/03/03/android_retrofit_php/">Android端使用retrofit上传多张图片，后端使用Php接收图片(包含前后端代码)</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 zzyyppqq 的个人博客">zzyyppqq</a></p>
+        <p><span>发布时间:</span>2016年03月03日 - 22时00分</p>
+        <p><span>最后更新:</span>2016年03月08日 - 23时09分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2016/03/03/android_retrofit_php/" title="Android端使用retrofit上传多张图片，后端使用Php接收图片(包含前后端代码)">http://zzyyppqq.github.io/2016/03/03/android_retrofit_php/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://zzyyppqq.github.io/2016/03/03/android_retrofit_php/　　作者: zzyyppqq" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/2016/03/03/as_jni/">
+                    超级简单的Android Studio jni 实现(无需命令行)
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/2016/03/03/android_info/">
+                    Android开发相关
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    
+</div>
+<style>
+    .left-col .switch-btn {
+        display: none;
+    }
+    .left-col .switch-area {
+        display: none;
+    }
+</style>
+
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+            $(".switch-btn, .switch-area").fadeOut(300);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+            $(".switch-btn, .switch-area").fadeIn(500);
+        }
+    })
+
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+        $(".switch-btn, .switch-area").show();
+    }
+</script>
+
+
+
+
+    <div class="share">
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+    <a href="#" class="bds_copy" data-cmd="copy" title="复制网址"></a>
+    <a href="#" class="bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+    </div>
+    <script>
+        window._bd_share_config={
+            "common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+    </script>
+</div>
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="2016/03/03/android_retrofit_php/" data-title="Android端使用retrofit上传多张图片，后端使用Php接收图片(包含前后端代码)" data-url="http://zzyyppqq.github.io/2016/03/03/android_retrofit_php/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zzyyppqq"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        <!-- ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/js/embed.js';-->
+        ds.src = 'https://zzyyppqq.github.io/js/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+    <!-- 多说公共JS代码 end -->
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2016/03/03/as_jni/" title="上一篇: 超级简单的Android Studio jni 实现(无需命令行)">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/2016/03/03/android_info/" title="下一篇: Android开发相关">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/03/08/github_open_project/">GitHub上一些超炫的Android开源项目推荐</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/08/android_soft_plug/">让Android开发者相见恨晚的软件及插件</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/08/as_gradle-experimental/">Android Studio使用gradle-experimental构建NDK工程(无需Android.mk、Application.mk文件)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/08/react native source/">react-native-0.16.1 自定义Android组件部分的源码初探</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/08/react native two/">如何创建一个android的react-native组件（二）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/04/react native one/">如何创建一个android的react-native组件（一）</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/as_jni/">超级简单的Android Studio jni 实现(无需命令行)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/android_retrofit_php/">Android端使用retrofit上传多张图片，后端使用Php接收图片(包含前后端代码)</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/03/03/android_info/">Android开发相关</a></li></ul>
+    <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#toc, .switch-btn, .switch-area").toggle();
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+                $(".switch-btn, .switch-area").fadeToggle(300);
+            }
+        })
+    </script>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2016 zzyyppqq
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的静态博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减双栏 Hexo 博客主题">Yelee</a> by MOxFIVE
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >本站到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+    <script src="/js/GithubRepoWidget.js"></script>
+
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            var iPad = window.navigator.userAgent.indexOf('iPad');
+            if (iPad > -1 || $(".left-col").css("display") === "none") {
+                var bgColorList = ["#9db3f4", "#414141", "#e5a859", "#f5dfc6", "#c084a0", "#847e72", "#cd8390", "#996731"];
+                var bgColor = Math.ceil(Math.random() * (bgColorList.length - 1));
+                $("body").css({"background-color": bgColorList[bgColor], "background-size": "cover"});
+            }
+            else {
+                var backgroundnum = 5;
+                var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+                $("body").css({"background": backgroundimg, "background-attachment": "fixed", "background-size": "cover"});
+            }
+        })
+    </script>
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+
+    <script src="//cdn.bootcss.com/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>
