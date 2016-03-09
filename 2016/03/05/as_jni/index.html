@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="plugin," />
+  <meta name="keywords" content="android," />
 
 
 
@@ -59,34 +59,31 @@
 
 
 
-<meta name="description" content="一.谷歌插件
-
-1.Vysor - 通过 USB 数据线在电脑上远程控制 。例如大家开发好app的雏形了，需要通过投影演示给大家看，通常的做法是使用Genymotion模拟器，相对google原生的模拟器虽然快了很多，但毕竟是模拟器，很多效果不能随心所欲的控制，有了Vysor我们可以直接操作手机，Vysor会把画面同步到电脑上，非常流畅，我们Android开发者再也不用羡慕iOS开发者使用Qui">
+<meta name="description" content="1.配置Anroid Studio（这步是关键）">
 <meta property="og:type" content="article">
-<meta property="og:title" content="让Android开发者相见恨晚的软件及插件">
-<meta property="og:url" content="http://zzyyppqq.github.io/2016/03/08/android_soft_plug/index.html">
+<meta property="og:title" content="超级简单的Android Studio jni 实现(无需命令行)">
+<meta property="og:url" content="http://zzyyppqq.github.io/2016/03/05/as_jni/index.html">
 <meta property="og:site_name" content="zzyyppqq的个人博客">
-<meta property="og:description" content="一.谷歌插件
-
-1.Vysor - 通过 USB 数据线在电脑上远程控制 。例如大家开发好app的雏形了，需要通过投影演示给大家看，通常的做法是使用Genymotion模拟器，相对google原生的模拟器虽然快了很多，但毕竟是模拟器，很多效果不能随心所欲的控制，有了Vysor我们可以直接操作手机，Vysor会把画面同步到电脑上，非常流畅，我们Android开发者再也不用羡慕iOS开发者使用Qui">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-db1955ed624b83aa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-d90146e735612235.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-d5fb287ffa05c29e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-aff902a4a5e1b24c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-e35d07aacf735ea7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-d2ee86a20c160f2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-b241f3fd3fe01198.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-a31e98fc4e4a916e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-5565612c52bbd5dd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-2e244fbdd7fd6431.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-de62d8f8f865825c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2016-03-08T15:09:16.000Z">
+<meta property="og:description" content="1.配置Anroid Studio（这步是关键）">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-d6f1b53049572330.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-8f93effb6ea3e835.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-22d1c5f5c8d072b6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-152b7662911c49a6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-13747f6eedf18067.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-cf21dea66559c79e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-1a6c6770b10760b0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-cba9bf78ef1170e1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-8eb260ef71ceac1e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-f51068ce1b59c9ca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-ee869405e5ea0080.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-4e2c072cc0e99fea.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-4b0c5acf62455472.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-9d3b3f51af3d185d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-03-09T03:55:51.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="让Android开发者相见恨晚的软件及插件">
-<meta name="twitter:description" content="一.谷歌插件
-
-1.Vysor - 通过 USB 数据线在电脑上远程控制 。例如大家开发好app的雏形了，需要通过投影演示给大家看，通常的做法是使用Genymotion模拟器，相对google原生的模拟器虽然快了很多，但毕竟是模拟器，很多效果不能随心所欲的控制，有了Vysor我们可以直接操作手机，Vysor会把画面同步到电脑上，非常流畅，我们Android开发者再也不用羡慕iOS开发者使用Qui">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1226849-db1955ed624b83aa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="超级简单的Android Studio jni 实现(无需命令行)">
+<meta name="twitter:description" content="1.配置Anroid Studio（这步是关键）">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1226849-d6f1b53049572330.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -104,7 +101,7 @@
   };
 </script>
 
-  <title> 让Android开发者相见恨晚的软件及插件 | zzyyppqq的个人博客 </title>
+  <title> 超级简单的Android Studio jni 实现(无需命令行) | zzyyppqq的个人博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -252,7 +249,7 @@
             
             
               
-                让Android开发者相见恨晚的软件及插件
+                超级简单的Android Studio jni 实现(无需命令行)
               
             
           </h1>
@@ -264,8 +261,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-08T11:51:42+08:00" content="2016-03-08">
-              2016-03-08
+            <time itemprop="dateCreated" datetime="2016-03-05T21:00:49+08:00" content="2016-03-05">
+              2016-03-05
             </time>
           </span>
 
@@ -278,8 +275,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Chrome-Plugin/" itemprop="url" rel="index">
-                    <span itemprop="name">Chrome Plugin</span>
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
                   </a>
                 </span>
 
@@ -294,8 +291,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/08/android_soft_plug/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/08/android_soft_plug/" itemprop="commentsCount"></span>
+                <a href="/2016/03/05/as_jni/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/05/as_jni/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -317,34 +314,47 @@
       
 
       
-        <blockquote>
-<p>一.谷歌插件</p>
+        <p>1.配置Anroid Studio（这步是关键）<br><a id="more"></a></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-d6f1b53049572330.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="setting.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-8f93effb6ea3e835.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="javah.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-22d1c5f5c8d072b6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ndk-build.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-152b7662911c49a6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ndk-build clean.png"></p>
+<p>2.配置完成就可以使用javah 、ndk-build、ndk-build clean这三个命令了，那么在哪里使用这些命令，请看下图</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-13747f6eedf18067.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="tools.png"></p>
+<p>3.配置完成，我们开始新建工程MyNdk，然后新建jni目录</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-cf21dea66559c79e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="create jni.png"></p>
+<p>4.修改app下的build.gradle文件, 如下图<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ndk&#123;    </span><br><span class="line">  moduleName <span class="string">"MyLibrary"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">source</span>Sets.main&#123;</span><br><span class="line">    jni.srcDirs = []    </span><br><span class="line">    jniLibs.srcDir <span class="string">"src/main/libs"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-1a6c6770b10760b0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="app build.gradle.png"></p>
+<p>5.修改MyNdk下的gradle.properties文件（如果没有此文件，自己新建一个），如下图<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android.useDeprecatedNdk=<span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-cba9bf78ef1170e1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="MyNdk gradle.properties.png"></p>
+<p>6.新建MyNdk.java<br> <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class MyNdk &#123;</span><br><span class="line">    static &#123;</span><br><span class="line">        System.loadLibrary(<span class="string">"MyLibrary"</span>);    </span><br><span class="line">&#125;   </span><br><span class="line">    public native String getString();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-8eb260ef71ceac1e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="MyNdk.java.png"></p>
+<p>7.这步开始创建头文件，操作如下图（注意在MyNdk.java文件上点击右键）</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-f51068ce1b59c9ca.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="create com_zhangyp_higo_myndk_MyNdk.h file.png"></p>
+<p>8.执行完成后jni目录下就创建了com_zhangyp_higo_myndk_MyNdk.h文件，然后我们在jni目录下编写 MyLibrary.cpp、Android.mk、Application.mk这三个文件，代码如下：<br><img src="http://upload-images.jianshu.io/upload_images/1226849-ee869405e5ea0080.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="jni files.png"></p>
 <blockquote>
-<p>1.Vysor - 通过 USB 数据线在电脑上远程控制 。例如大家开发好app的雏形了，需要通过投影演示给大家看，通常的做法是使用Genymotion模拟器，相对google原生的模拟器虽然快了很多，但毕竟是模拟器，很多效果不能随心所欲的控制，有了Vysor我们可以直接操作手机，Vysor会把画面同步到电脑上，非常流畅，我们Android开发者再也不用羡慕iOS开发者使用Quick Time演示app的便利了。<br><a id="more"></a></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1226849-db1955ed624b83aa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1226849-d90146e735612235.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
-<p>2.DHC-模拟请求http接口，支持post、get、header、body、token、cookie、Content-Type等，开发app必备，可以把我们的所有接口都保存在里面，然后导出一个json文本，其他app开发成员可以直接导入使用，非常方便，熟悉之后接口文档都可以扔在边睡觉了^_^.</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1226849-d5fb287ffa05c29e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br><img src="http://upload-images.jianshu.io/upload_images/1226849-aff902a4a5e1b24c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>com_zhangyp_higo_myndk_MyNdk.h</p>
 </blockquote>
-<p>二.软件篇</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* DO NOT EDIT THIS FILE - it is machine generated */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;jni.h&gt;</span></span></span><br><span class="line"><span class="comment">/* Header for class com_zhangyp_higo_myndk_MyNdk */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> _Included_com_zhangyp_higo_myndk_MyNdk</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _Included_com_zhangyp_higo_myndk_MyNdk</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __cplusplus</span></span><br><span class="line"><span class="keyword">extern</span> <span class="string">"C"</span> &#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="comment">/*</span><br><span class="line"> * Class:     com_zhangyp_higo_myndk_MyNdk</span><br><span class="line"> * Method:    getString</span><br><span class="line"> * Signature: ()Ljava/lang/String;</span><br><span class="line"> */</span></span><br><span class="line"><span class="function">JNIEXPORT jstring JNICALL <span class="title">Java_com_zhangyp_higo_myndk_MyNdk_getString</span></span><br><span class="line">  <span class="params">(JNIEnv *, jobject)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __cplusplus</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>1.Lantern-一款可以让你使用谷歌搜索的软件（支持所有pc平台），偷偷告诉你现在也支持Android手机了，大家可以使用android手机上youtube、facebook、twitter、instagram了。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1226849-e35d07aacf735ea7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1226849-d2ee86a20c160f2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
-<p>2.Charles-抓包工具，相信知道的人应该很多了，但是也不得不提一下它，对开发app帮助很大，值得推荐。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1226849-b241f3fd3fe01198.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>MyLibrary.cpp</p>
 </blockquote>
-<p>三，桌面版JAR的客户端</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="string">"com_zhangyp_higo_myndk_MyNdk.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">JNIEXPORT jstring JNICALL <span class="title">Java_com_zhangyp_higo_myndk_MyNdk_getString</span></span><br><span class="line">  <span class="params">(JNIEnv * env, jobject obj)</span></span>&#123;</span><br><span class="line">   <span class="keyword">return</span> (*env).NewStringUTF(<span class="string">"This is mylibrary !!!"</span>);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>1.ClassyShark可以浏览安卓下可执行的程序，支持dex、jar、apk、class、arr<br><a href="http://download.csdn.net/detail/zzyyppqq/9451122" target="_blank" rel="external">ClassyShark下载(github上貌似下载不到jar,自己下载源码打的jar包)</a><br><a href="https://github.com/google/android-classyshark" target="_blank" rel="external">ClassyShark的github地址</a></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1226849-a31e98fc4e4a916e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
-<p>2.jadxGUI也可以浏览安卓下可执行的程序，支持zip、dex、jar、apk、class<br><a href="http://download.csdn.net/detail/zzyyppqq/9451123" target="_blank" rel="external">jadxGUI下载</a><br>下载完成后如下图目录结构，进入bin下，执行./jadx-gui就可以打开图形化界面了<br><a href="https://github.com/skylot/jadx" target="_blank" rel="external">jadx源码地址</a><br><img src="http://upload-images.jianshu.io/upload_images/1226849-5565612c52bbd5dd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br><img src="http://upload-images.jianshu.io/upload_images/1226849-2e244fbdd7fd6431.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
-<p>3.美团的最新APK文件,在ClassyShark与jadxGUI打开之后的对比图如下</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1226849-de62d8f8f865825c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>Android.mk</p>
 </blockquote>
+<figure class="highlight mk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">LOCAL_PATH := <span class="variable">$(call my-dir)</span></span><br><span class="line"></span><br><span class="line">include $(CLEAR_VARS)</span><br><span class="line"></span><br><span class="line">LOCAL_MODULE := MyLibrary</span><br><span class="line">LOCAL_SRC_FILES =: MyLibrary.cpp</span><br><span class="line">include $(BUILD_SHARED_LIBRARY)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Application.mk</p>
 </blockquote>
-<p>结语：会不定时添加令人优秀的软件及工具，期望大家的推荐^_^</p>
-<p>1.<a href="http://www.jianshu.com/p/9847fc8fd5e4" target="_blank" rel="external">Android端使用retrofit上传多张图片，后端使用Php接收图片(包含前后端代码)</a><br>2.<a href="http://www.jianshu.com/p/e689d0196a17" target="_blank" rel="external">超级简单的Android Studio jni 实现(无需命令行)</a><br>3.<a href="http://www.jianshu.com/p/dbaac3ac9aee" target="_blank" rel="external">GitHub上一些超炫的Android开源项目推荐</a></p>
+<figure class="highlight mk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">APP_MODULES := MyLibrary</span><br><span class="line">APP_ABI := all</span><br></pre></td></tr></table></figure>
+<p>9.如何执行ndk-build，请看下图：（注意在jni目录上点击右键）</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-4e2c072cc0e99fea.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="make ndk-build .png"></p>
+<p>10.得到so文件，如下图</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-4b0c5acf62455472.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="so file.png"></p>
+<p>12.在MainActivity中调用，代码如下<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        TextView tv = (TextView) findViewById(R.id.tv);</span><br><span class="line"></span><br><span class="line">        tv.setText(<span class="keyword">new</span> MyNdk().getString());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>12.大功告成，可以运行了，oh yet！</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-9d3b3f51af3d185d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="MyLibrary.png"></p>
 
       
     </div>
@@ -359,7 +369,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/plugin/" rel="tag">#plugin</a>
+            <a href="/tags/android/" rel="tag">#android</a>
           
         </div>
       
@@ -368,16 +378,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/08/as_gradle-experimental/" rel="next" title="Android Studio使用gradle-experimental构建NDK工程(无需Android.mk、Application.mk文件)">
-                <i class="fa fa-chevron-left"></i> Android Studio使用gradle-experimental构建NDK工程(无需Android.mk、Application.mk文件)
+              <a href="/2016/03/04/github_open_project/" rel="next" title="GitHub上一些超炫的Android开源项目推荐">
+                <i class="fa fa-chevron-left"></i> GitHub上一些超炫的Android开源项目推荐
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/03/08/github_open_project/" rel="prev" title="GitHub上一些超炫的Android开源项目推荐">
-                GitHub上一些超炫的Android开源项目推荐 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/03/06/as_gradle-experimental/" rel="prev" title="Android Studio使用gradle-experimental构建NDK工程(无需Android.mk、Application.mk文件)">
+                Android Studio使用gradle-experimental构建NDK工程(无需Android.mk、Application.mk文件) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -393,10 +403,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2016/03/08/android_soft_plug/"
-     data-title="让Android开发者相见恨晚的软件及插件"
+        <div class="ds-share flat" data-thread-key="2016/03/05/as_jni/"
+     data-title="超级简单的Android Studio jni 实现(无需命令行)"
      data-content=""
-     data-url="http://zzyyppqq.github.io/2016/03/08/android_soft_plug/">
+     data-url="http://zzyyppqq.github.io/2016/03/05/as_jni/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -423,8 +433,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/08/android_soft_plug/"
-           data-title="让Android开发者相见恨晚的软件及插件" data-url="http://zzyyppqq.github.io/2016/03/08/android_soft_plug/">
+      <div class="ds-thread" data-thread-key="2016/03/05/as_jni/"
+           data-title="超级简单的Android Studio jni 实现(无需命令行)" data-url="http://zzyyppqq.github.io/2016/03/05/as_jni/">
       </div>
     
   </div>
