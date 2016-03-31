@@ -1,0 +1,921 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="android," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="zzyyppqq的个人博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="最近闲来无事，就想编译一下android源码折腾折腾。过程还算顺利，编译源码用了近3小时，编译sdk用了近30分钟。关于为什么要编译4.4的源码，而不编译5.0、6.0的源码，一是正好笔记本中有下载好的4.4源码；二是一些源码学习的资料大都是4.x、2.x的源码，而且4.4系统也是现在市场占有率最大的；三是基于4.4的源码编译，出现问题易于解决，因为大家都遇到过嘛(嘿嘿！)。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ubuntu12.04(64bit)编译android4.4源码、sdk及kernel">
+<meta property="og:url" content="http://zzyyppqq.github.io/2016/03/10/android source compile/index.html">
+<meta property="og:site_name" content="zzyyppqq的个人博客">
+<meta property="og:description" content="最近闲来无事，就想编译一下android源码折腾折腾。过程还算顺利，编译源码用了近3小时，编译sdk用了近30分钟。关于为什么要编译4.4的源码，而不编译5.0、6.0的源码，一是正好笔记本中有下载好的4.4源码；二是一些源码学习的资料大都是4.x、2.x的源码，而且4.4系统也是现在市场占有率最大的；三是基于4.4的源码编译，出现问题易于解决，因为大家都遇到过嘛(嘿嘿！)。">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-42ba4492e7cc0377.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-26710b9e8a25af7f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-7a2c7e8596e3fdaf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-af217a3dc507e531.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-8f51128b0442b4ab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-4a9ece5069b0e485.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-4710930a27136d34.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-84bc3c6763f14785.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-90d8a9ae0b5c492e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-8bb48695caf38b19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-38531a43779557e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-170923b470f6db7e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-562f7ef044dbddd9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-ac255d879788f02f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-7b3a020c7c1a0fbc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-6bff4d08b9ec4b86.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-640578402c2af3b6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-4d24de3077928dc7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-89481336e510174e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-bdaf97f696048adb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-fd0e53bd0f93b754.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-ace28a455da09f2d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-cbdabf0da61822d8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-dd7423794d105592.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-c874f84aae1b427c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-e2f866f62d7c53f2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-5bd3ab4780ce3e21.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-4c24cd2ac62938d5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-f533b3df3a977e7b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-3500e92a80f2749c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-9463b50657d0fcc8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-3300de5d33858282.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-e122c8a06841f78c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-1e1c9b6309c8df53.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-377d01c15be59d4d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1226849-a6240911921090e2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-03-31T06:39:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ubuntu12.04(64bit)编译android4.4源码、sdk及kernel">
+<meta name="twitter:description" content="最近闲来无事，就想编译一下android源码折腾折腾。过程还算顺利，编译源码用了近3小时，编译sdk用了近30分钟。关于为什么要编译4.4的源码，而不编译5.0、6.0的源码，一是正好笔记本中有下载好的4.4源码；二是一些源码学习的资料大都是4.x、2.x的源码，而且4.4系统也是现在市场占有率最大的；三是基于4.4的源码编译，出现问题易于解决，因为大家都遇到过嘛(嘿嘿！)。">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1226849-42ba4492e7cc0377.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> ubuntu12.04(64bit)编译android4.4源码、sdk及kernel | zzyyppqq的个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">zzyyppqq的个人博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Android知识分享</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-heartbeat fa-fw"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                ubuntu12.04(64bit)编译android4.4源码、sdk及kernel
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-10T21:00:49+08:00" content="2016-03-10">
+              2016-03-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/10/android source compile/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/10/android source compile/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近闲来无事，就想编译一下android源码折腾折腾。过程还算顺利，编译源码用了近3小时，编译sdk用了近30分钟。关于为什么要编译4.4的源码，而不编译5.0、6.0的源码，一是正好笔记本中有下载好的4.4源码；二是一些源码学习的资料大都是4.x、2.x的源码，而且4.4系统也是现在市场占有率最大的；三是基于4.4的源码编译，出现问题易于解决，因为大家都遇到过嘛(嘿嘿！)。</p>
+<a id="more"></a>
+<p>当然类似的文章教程很多，我主要是记录自己编译源码的过程以及遇到的一些问题，方便自己以后查看。</p>
+<p>资源下载：<a href="http://pan.baidu.com/s/1o6SqBJ8" target="_blank" rel="external">ubuntu12.04系统、android4.4源码、jdk1.6.0_35、kernel源码</a></p>
+<blockquote>
+<p>一.编译环境：</p>
+</blockquote>
+<p>1.ubuntu12.04(64bit)</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-42ba4492e7cc0377.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>2.android4.4源码(无.repo文件及kernel源码)<br>注：没有.repo也能编译</p>
+<p>a.压缩包大小：<br><img src="http://upload-images.jianshu.io/upload_images/1226849-26710b9e8a25af7f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br>b.解压后大小：<br><img src="http://upload-images.jianshu.io/upload_images/1226849-7a2c7e8596e3fdaf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br>c.编译源码及sdk后文件大小<br><img src="http://upload-images.jianshu.io/upload_images/1226849-af217a3dc507e531.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br> 我的虚拟机64G的空间只剩下6.1G可用了&gt;_&lt;  , 简友们要留足空间啊！</p>
+<p>d.编译后android4.4文件目录：<br><img src="http://upload-images.jianshu.io/upload_images/1226849-8f51128b0442b4ab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>3.java版本</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-4a9ece5069b0e485.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<blockquote>
+<p>二.编译源码，得到system.img</p>
+</blockquote>
+<p>1.安装java</p>
+<p>安装位置：<br><img src="http://upload-images.jianshu.io/upload_images/1226849-4710930a27136d34.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>设置java环境变量：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/<span class="built_in">local</span>/java/jdk1.6.0_35  </span><br><span class="line"><span class="built_in">export</span> JRE_HOME=/usr/<span class="built_in">local</span>/java/jdk1.6.0_35/jre   </span><br><span class="line"><span class="built_in">export</span> CLASSPATH=.:<span class="variable">$JAVA_HOME</span>/lib:<span class="variable">$JRE_HOME</span>/lib:<span class="variable">$CLASSPATH</span>  </span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$JRE_HOME</span>/bin:<span class="variable">$JAVA_HOME</span>:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
+<p>使用以下命令，就可以使用gedit打开etc目录下的profile文件添加环境变量<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo gedit /etc/profile</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-84bc3c6763f14785.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>2.安装编译所需的包</p>
+<p>注：大家先把这些包安装上，编译基本不会遇到问题，会很顺利。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install git git-core gnupg flex bison gperf build-essential zip curl zlib1g-dev libc6-dev </span><br><span class="line">sudo apt-get install lib32ncurses5-dev x11proto-core-dev libx11-dev </span><br><span class="line">sudo apt-get install lib32z-dev libgl1-mesa-dev g++-multilib mingw32 tofrodos python-markdown </span><br><span class="line">sudo apt-get install libxml2-utils xsltproc gcc-multilib lib32readline5-dev</span><br></pre></td></tr></table></figure></p>
+<p>3.开始编译 ，源码的位置及命令如下图：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">source</span> build/envsetup.sh</span><br><span class="line">$ make (也可以使用 make -j4 四线程编译)</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-90d8a9ae0b5c492e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>注：我使用的是make，没有加-jx ，用了三个小时，主要是我用的是虚拟机，不敢开太多的线程去编译，怕烧坏电脑^_^，下图是我的电脑编译源码的时候cpu的使用率，大部分时间在100%，有时会跳到200%<br><img src="http://upload-images.jianshu.io/upload_images/1226849-8bb48695caf38b19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="QQ20160310-1@2x.png"></p>
+<p>4.编译过程也不是一帆风顺，我遇到了第一个错误，如下<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"frameworks/compile/libbcc/tools/build/gen-build-info.py"</span>, line 154, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    main()</span><br><span class="line">  File <span class="string">"frameworks/compile/libbcc/tools/build/gen-build-info.py"</span>, line 111, <span class="keyword">in</span> main</span><br><span class="line">    build_rev = get_repo_revision(repo_dir)</span><br><span class="line">  File <span class="string">"frameworks/compile/libbcc/tools/build/gen-build-info.py"</span>, line 39, <span class="keyword">in</span> get_repo_revision</span><br><span class="line">    cwd=repo_dir)</span><br><span class="line">  File <span class="string">"/usr/lib/python2.7/subprocess.py"</span>, line 679, <span class="keyword">in</span> __init__</span><br><span class="line">    errread, errwrite)</span><br><span class="line">  File <span class="string">"/usr/lib/python2.7/subprocess.py"</span>, line 1249, <span class="keyword">in</span> _execute_child</span><br><span class="line">    raise child_exception</span><br><span class="line">OSError: [Errno 2] No such file or directory</span><br><span class="line">make: *** [out/host/linux-x86/obj/SHARED_LIBRARIES/libbcc_intermediates/BuildInfo.cpp] Error 1</span><br><span class="line">make: *** Deleting file `out/host/linux-x86/obj/SHARED_LIBRARIES/libbcc_intermediates/BuildInfo.cpp<span class="string">'</span></span><br></pre></td></tr></table></figure></p>
+<p>知道为什么吗？居然是git没有安装,晕… ，下面安装git<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install git</span><br></pre></td></tr></table></figure></p>
+<p>5.git安装好了，执行make,继续编译，等啊等…  ，时间过去了2个多小时，迎来了第二个错误，囧… ，如下<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Notice file: system/extras/timeinfo/NOTICE -- out/target/product/generic/obj/NOTICE_FILES/src//system/xbin/timeinfo.txt</span><br><span class="line">Install: out/target/product/generic/system/xbin/timeinfo</span><br><span class="line">Copy xml: out/target/product/generic/system/etc/apns-conf.xml</span><br><span class="line">/bin/bash: xmllint: <span class="built_in">command</span> not found</span><br><span class="line">make: *** [out/target/product/generic/system/etc/apns-conf.xml] Error 127</span><br></pre></td></tr></table></figure></p>
+<p>网上搜了搜，原因是少了libxml2-utils，安装libxml2-utils，如下<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install libxml2-utils</span><br></pre></td></tr></table></figure></p>
+<p>注：这只是我编译中遇到的一些问题，我已经在上面第二步的命令中补上了git和libxml2-utils，所以按照我的这个教程编译就不会再出现这两个问题了，不过也可能会遇到其他问题，毕竟每个人电脑的环境不可能完全一样。</p>
+<p>6.耶！编译终于完成，看看我的编译完成界面截图</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-38531a43779557e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>生成system.img所在目录：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-170923b470f6db7e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>7.ok，到这一步源码编译已经完成，我们可以运行模拟器了，如果我们上图的命令界面还在，可以直接输入命令 emulator,如下图：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ emulator</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-562f7ef044dbddd9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p> 如果这个界面关了，也没关系，可以运行如下这些命令：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">source</span> build/envsetup.sh</span><br><span class="line">$ lunch sdk-eng</span><br><span class="line">$ emulator</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-ac255d879788f02f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>到这里模拟器成功启动，如下</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-7b3a020c7c1a0fbc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="QQ20160310-3@2x.png"></p>
+<blockquote>
+<p>三.编译sdk</p>
+</blockquote>
+<p>1.运行如下命令：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">source</span> build/envsetup.sh</span><br><span class="line">$ lunch sdk-eng</span><br><span class="line">$ make sdk</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-6bff4d08b9ec4b86.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>2.运行make sdk(或者make -j4 sdk加速编译)开始编译，10分钟过去了，错误终于来了，如下<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Install: out/host/linux-x86/framework/liblzf.jar</span><br><span class="line"><span class="comment">## Running sdk/eclipse/scripts/create_all_symlinks.sh</span></span><br><span class="line"><span class="comment">### Starting tools/base: gradlew publishLocal</span></span><br><span class="line">sdk/eclipse/scripts/create_all_symlinks.sh: line 285: <span class="built_in">cd</span>: tools/base: No such file or directory</span><br><span class="line">make: *** [out/host/linux-x86/obj/EXECUTABLES/monitor_intermediates/monitor] Error 1</span><br></pre></td></tr></table></figure></p>
+<p>报错很明显，toos/base这个目录或文件找不到，网上搜了下，答案是这个文件在.repo中，需要去同步下载更新，no no no…按照这个方法，什么时候才能下载下来，接着搜索，终于找到了一个粗暴而简单的的解决办法，不知道有没有后遗症；办法是把所有用到tools/base的地方都注释掉，文件所在路径如下：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/home/zhangyipeng/Documents/android4.4/sdk/eclipse/scripts/create_all_symlinks.sh</span><br></pre></td></tr></table></figure></p>
+<p>使用sublime text打开，找到所有tools/base的使用地方注释掉，继续make sdk，过了1分钟又来了一个错误，还是这个create_all_symlinks.sh文件中的tools/swt: No such file or directory ,继续把tools/swt相关的地方注释掉，<br>修改的几个地方如下图：<br><img src="http://upload-images.jianshu.io/upload_images/1226849-640578402c2af3b6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-4d24de3077928dc7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br><img src="http://upload-images.jianshu.io/upload_images/1226849-89481336e510174e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>接着make sdk，再继续在编译…   </p>
+<p>3.等了近20分钟，又出现了一个类似的错误：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Install: out/host/linux-x86/framework/liblzf.jar</span><br><span class="line"><span class="comment">## Running sdk/eclipse/scripts/create_all_symlinks.sh</span></span><br><span class="line"><span class="comment">### Starting tools/base: gradlew publishLocal</span></span><br><span class="line">sdk/build/toos.atree: line 124: <span class="built_in">cd</span>: tools/base: No such file or directory</span><br></pre></td></tr></table></figure>
+<p>文件位置：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/home/zhangyipeng/Documents/android4.4/sdk/build/toos.atree</span><br></pre></td></tr></table></figure></p>
+<p>修改如下图：<br><img src="http://upload-images.jianshu.io/upload_images/1226849-bdaf97f696048adb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br>以上问题参考网站：<br><a href="http://blog.csdn.net/lincyang/article/details/48630185/" target="_blank" rel="external">http://blog.csdn.net/lincyang/article/details/48630185/</a><br><a href="http://blog.sina.com.cn/s/blog_4ba5b45e0102ejyg.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_4ba5b45e0102ejyg.html</a></p>
+<p>4.最后一次make sdk,大概10分钟过去了，终于迎来了胜利的曙光^_^</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-fd0e53bd0f93b754.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>生成的sdk所在位置：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-ace28a455da09f2d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br>注：我们自己通过源码编译的sdk是最适合这套源码的sdk，以后编译其他功能可能会用到。也有可能会因为其他编译命令而把sdk删了，最好把编译好的sdk拷贝一份放置到源码外。</p>
+<blockquote>
+<p>四.kernel编译</p>
+</blockquote>
+<p>注意：编译完源码和sdk最好把整个源码备份一下，不然可能会因为一些命令把system.img删除了。那时就要重新编译，不过不需要3个小时那么久，只要编译过一次再次编译大概需要近半个小时。在编译kernel时我就遇到了这个问题，编译完kernel，居然找不到system.img了，到out中去找，果然被删除了，欲哭无泪&gt;_&lt; ， 不过还好我有先见之名，我编译完sdk直接把真个虚拟机系统都拷贝了一份，整整62.53G。我实在不想重新编译源码了，也不想编译kernel了，就先把整个编译后的kernel也拷贝了一份到mac本机。然后把当前虚拟机删了，使用拷贝的虚拟机系统运行，然后把备份的kernel再拷贝到虚拟机中的源码下，这下可以终于可以使用自己编译的kernel运行模拟器了。<br><img src="http://upload-images.jianshu.io/upload_images/1226849-cbdabf0da61822d8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>1.在android4.4源码目录下，建一个空的kernel文件夹，把解压后的goldfish-android-goldfish-3.4文件夹移动到kernel目录下，如下图：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-dd7423794d105592.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br>2.进入goldfish-android-goldfish-3.4目录下，配置环境变量，运行如下命令：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/home/zhangyipeng/Documents/android4.4/prebuilts/gcc/linux-x86/arm/arm-eabi-4.6/bin</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-c874f84aae1b427c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br>3.修改goldfish-android-goldfish-3.4目录下的Makefile文件，如下图：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#ARCH		?= $(SUBARCH)</span></span><br><span class="line"><span class="comment">#CROSS_COMPILE	?= $(CONFIG_CROSS_COMPILE:"%"=%)</span></span><br><span class="line"><span class="comment">#上面注释掉，加入下面的</span></span><br><span class="line">ARCH ?= arm</span><br><span class="line">CROSS_COMPILE     ?= arm-eabi-</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-e2f866f62d7c53f2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-5bd3ab4780ce3e21.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br>4.在goldfish-android-goldfish-3.4目录下如下命令<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ make goldfish_armv7_defconfig</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-4c24cd2ac62938d5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br>5.在goldfish-android-goldfish-3.4目录执行make命令：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ make</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-f533b3df3a977e7b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br>6.等了几分钟，编译完成<br><img src="http://upload-images.jianshu.io/upload_images/1226849-3500e92a80f2749c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br>在/home/zhangyipeng/Documents/android4.4/kernel/goldfish-android-goldfish-3.4/arch/arm/boot目录下多了两个文件，如下图：<br><img src="http://upload-images.jianshu.io/upload_images/1226849-9463b50657d0fcc8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>6.使用我们上一步编译的内核，运行模拟器，首先进入源码目录下，运行如下命令：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">source</span> build/envsetup.sh</span><br><span class="line">$ lunch sdk-eng</span><br><span class="line"><span class="comment">#指定内核文件启动模拟器</span></span><br><span class="line">$ emulator -kernel ./kernel/goldfish-android-goldfish-3.4/arch/arm/boot/zImage</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-3300de5d33858282.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br>7.模拟器运行如下，可以看到预编译源码时的模拟器相比，内核已经变了<br><img src="http://upload-images.jianshu.io/upload_images/1226849-e122c8a06841f78c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"><br>模拟器运行的时候也可以使用如下命令查看内核：<br>注：找到我们上一步编译的SDK，进入到platform-tools目录下（最好把我们编译的sdk拷贝一份放到源码外）<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ ./adb shell</span><br><span class="line">root@generic:/ <span class="comment"># cd proc </span></span><br><span class="line">root@generic:/proc <span class="comment"># cat version</span></span><br><span class="line">Linux version 3.4.67 (zhangyipeng@ubuntu) (gcc version 4.6.x-google 20120106 (prerelease) (GCC) ) <span class="comment">#1 PREEMPT Fri Mar 11 17:39:00 CST 2016</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-1e1c9b6309c8df53.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>8.对比源码中默认的内核与自己编译的内核的区别，如下图：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-377d01c15be59d4d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1226849-a6240911921090e2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
+<p>到此，编译过程终于结束了，耶！！！</p>
+<p>注：所有需要的资源都已经在文章开头提供，如果你用我提供的这些资源编译源码、sdk及kernel，再按照我上面的过程一步一步的来，成功编译不在话下。各位简友可能注意到文件日期了，从截图就可以看出来，这篇文章是我这两天（16.3.10～16.3.11号）一边编译一边写的，绝对可靠。而且步骤也比较详细、完善（包含了源码编译、sdk编译、内核编译）。</p>
+<p>10.如果编译完成了，想把源码导入到Android Studio中查看，请接着看下篇文章：<br><a href="http://www.jianshu.com/p/fb16fa459acf" target="_blank" rel="external">Android Studio导入android源码技巧(源码无需编译即可导入)</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/android/" rel="tag">#android</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/09/android_info/" rel="next" title="Android开发相关">
+                <i class="fa fa-chevron-left"></i> Android开发相关
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/12/as import source/" rel="prev" title="Android Studio导入android源码技巧(源码无需编译即可导入)">
+                Android Studio导入android源码技巧(源码无需编译即可导入) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/03/10/android source compile/"
+     data-title="ubuntu12.04(64bit)编译android4.4源码、sdk及kernel"
+     data-content=""
+     data-url="http://zzyyppqq.github.io/2016/03/10/android source compile/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/03/10/android source compile/"
+           data-title="ubuntu12.04(64bit)编译android4.4源码、sdk及kernel" data-url="http://zzyyppqq.github.io/2016/03/10/android source compile/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/favicon.png"
+               alt="zzyyppqq" />
+          <p class="site-author-name" itemprop="name">zzyyppqq</p>
+          <p class="site-description motion-element" itemprop="description">zzyyppqq's blog | Andorid | React Native</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+          
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/zzyyppqq" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/4a633d456ac7/latest_articles" target="_blank">
+                  
+                    <i class="fa fa-heartbeat"></i> JianShu
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">Links</p>
+            
+              <span class="links-of-author-item">
+                <a href="https://hexo.io/themes/" target="_blank">MacTalk</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zzyyppqq</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+
+  
+
+
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.scheme !== 'Pisces' && (CONFIG.sidebar.display === 'post' || CONFIG.sidebar.display === 'always')) {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zzyyppqq"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
+
+  
+  
+  
+
+  
+
+
+</body>
+</html>
